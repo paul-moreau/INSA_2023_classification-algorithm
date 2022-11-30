@@ -1,20 +1,15 @@
-#ifndef DATA_HPP
-#define DATA_HPP
+#include <iostream>
+#include <fstream>
+using namespace std;
 
-namespace data{
-    
-    class Data{
+
+class Data{
+    private:
+        int nbData;
+        int nbSampleMax;
         
-        private:
-            float[] _data;
-            int _nb_features;
-            int _nb_samples;
-
-        public:
-
-            Data();
-            ~Data();
-
-
-    }
-}
+    public:
+        Data();
+        ~Data();
+        int readFile(string file);
+};
