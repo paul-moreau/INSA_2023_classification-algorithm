@@ -11,5 +11,5 @@ class Data{
     public:
         Data();
         ~Data();
-        int readFile(string file);
+        int readFile(string fileName);
 };
