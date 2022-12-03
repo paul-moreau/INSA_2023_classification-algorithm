@@ -1,18 +1,5 @@
 #include "data.hpp"
-
-//méthode split utile pour split une string en un vector de string avec un char delimiter comme ' ' par exemple
-//TODO : faire un fichier utils.cpp et mettre ce genre de méthodes qui n'ont rien à voir avec la classe en question (ici Data)
-vector<string> split (const string &s, char delim) {
-    vector<string> result;
-    stringstream ss (s);
-    string item;
-
-    while (getline (ss, item, delim)) {
-        result.push_back (item);
-    }
-
-    return result;
-}
+#include "utils.cpp"
 
 //default constructor of class Data
 Data::Data(){
@@ -28,8 +15,13 @@ Data::Data(int nbData, int nbSampleMax, bool training){
     _training = training;
 }
 
-//TODO: destructeur par default de la classe Data (détruire une multimap ??)
+//Est ce que ça marche ? en tous cas ça compile
 Data::~Data(){
+    multimap<int,vector<float>>::iterator it;
+    for (it=_data.begin(); it!=_data.end(); ++it){
+        delete &(*it).first;
+        delete[] &(*it).second;
+    }
 
 }
 
@@ -45,82 +37,104 @@ void Data::print() const{
 
 //lit un fichier et remplit la multimap de la class Data
 //TODO: réécrire dans un fichier dont on connait l'entete ? 
-//TODO: utiliser le retour de la fonction au lieu de juste un return 0 ?
-//TODO: ici on passe d'abord les datas dans une matrice de float mais c'est surement possible de les passer dans la multimap directement
 //TODO: ajouter du debug/des tests unitaires/de la gestion d'erreur ? (si le fichier existe pas ? si la "trame" du fichier n'est pas celle attendue ?)
 int Data::readFile(string pathFile){
-    ifstream fichier (pathFile, ios::in);
-    
-    vector<vector<float>> datas;
+    ifstream fileRead (pathFile, ios::in);
 
-    //lecture du fichier et passage des données dans la class Data + dans une matrice de float
-    if(fichier)
+    //File read and extraction of data to put them in Data class attributes 
+    if(fileRead)
     {
         string line;
         vector<string> lines;
-        while(getline(fichier,line)){
+        while(getline(fileRead,line)){
             lines.push_back(line);
         }
-        fichier.close();
+        fileRead.close();
+
         _nbData = stoi(lines[0]);
         _nbSampleMax = stoi(lines[1]);
+
+        //_data : string to int for key and string to float for caracteristics values, all in the multimap
         for (int i=2;i<_nbData+2;i++){
+
             vector<string> oneLineOfData = split(lines[i],' ');
+
             vector<float> tempDatas;
-            for(int j=0;j<_nbSampleMax+1;j++){
+            for(int j=1;j<_nbSampleMax+1;j++){
                 tempDatas.push_back(stof(oneLineOfData[j]));
             }
-            datas.push_back(tempDatas);
+            int key = stoi(oneLineOfData[0]);
+
+            _data.insert(pair<int, vector<float>>(key, tempDatas));
         }
     }
     else
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
-    }
-
-    
-    //Transformation de la matrice de float en une multimap de int/float
-    for(vector<float> vf : datas){
-        int key = vf[0];
-        //cout << "key =" << key << endl;
-        vector<float> temp;
-        //cout << vf.size() << endl;
-        for(int i=1;i<vf.size();i++){
-            //cout << i << endl;
-            temp.push_back(vf[i]);
-        }
-        _data.insert(pair<int,vector<float>>(key,temp));
+        return 0;
     }
     
     //Affichage de toute les clés de la multimap
     //Comptage puis affichage du nombre de clés de la multimap
     //utile pour debug
-    /*multimap<int,vector<float>>::iterator it;
+    multimap<int,vector<float>>::iterator it;
     int nombreData = 0;
-    cout << "_data contains:\n";
+    int test =0;
+    //cout << "_data contains:\n";
     for (it=_data.begin(); it!=_data.end(); ++it){
         nombreData++;
-        cout << (*it).first << ' ';
+        //cout << (*it).first << ' ';
     }
-    cout<<endl;
-    cout << "nb data = " << nombreData << endl;
-    */
+    if(nombreData != _nbData){
+        cout << "ERREUR: Données du fichier mal lues." << endl;
+    }
+    //cout<<endl;
+    //cout << "nb data = " << nombreData << endl;
+    
 
    //Début de gestion d'un fichier en écriture, à voir si on le fait et si oui quelle "trame" de fichier on choisit 
-   /*ofstream result ("result.txt", ios::out);
+    ofstream result ("dataRead.txt", ios::out);
+
     if(result){
-        cout << datas.size();
-        result << "size datas = " << datas.size() << endl;
-        result << "_nbData = " << _nbData << endl;
-        for(vector<float> vf : datas){
-            for(float f : vf){
-                result << f << ' ';
+        result << "nombreData=" << nombreData << "/";
+        result << "_nbData=" << _nbData << "/";
+        result << "_SampleMax=" << _nbSampleMax << endl;
+        for(it = _data.begin(); it != _data.end(); ++it){
+            result << (*it).first << " " ;
+            for(float f : (*it).second){
+                result << f << " ";
             }
             result << endl;
         }
+        result.close();
     }else{
         cout << "ERREUR: Impossible d'ouvrir le fichier en écriture." << endl;
-    }*/
+        return 0;
+    }
     
-    return 0;
+    return 1;
+}
+
+//Compte le nombre de data différentes pour le même résultat
+int Data::howMuch(int key) const {
+    int res = 0;
+    if(!_data.empty()){
+        if(0<=key<=9){
+            auto it1 = _data.lower_bound(key);
+            auto it2 = _data.upper_bound(key);
+            while(it1 != it2){
+                if(it1->first == key){
+                    res++;
+                }
+                it1 ++ ;
+            }
+        }else{
+            cout << "valeur recherchée doit être comprise entre 0 et 9" << endl;
+            return 0;
+        }
+    }else{
+        cout << "ERREUR: aucune donnée n'a été lue, comptage impossible" << endl;
+        return 0;
+    }
+    return res;
 }

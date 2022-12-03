@@ -5,7 +5,6 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <sstream>
 #include <map>
 
 using namespace std;
@@ -32,5 +31,7 @@ class Data{
         multimap<int,vector<float>> getData() const {return _data;}
         
         int readFile(string pathFile);
+        int howMuch(int key) const;
+        
 };
 #endif

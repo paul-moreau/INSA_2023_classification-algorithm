@@ -66,4 +66,9 @@ static void readData(char *argv[]){
     test->readFile(argv[2]);
 
     test->print();
+
+    int nbOf2 = test->howMuch(2);
+    cout << "There are " << nbOf2 << " data to describe the 2" << endl;
+
+    delete test;
 }
