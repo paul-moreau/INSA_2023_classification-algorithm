@@ -2,9 +2,12 @@
 #include <iostream>
 #include <getopt.h>
 #include "data.hpp"
+#include "data.cpp"
+
 using namespace std;
 
 static void help(void);
+static void readData(char *argv[]);
 
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
@@ -26,8 +29,7 @@ int main(int argc, char *argv[]){
             break;
 
         case 'r':
-            cout<<"r";
-
+            readData(argv);
             //p=test.readFile(argv[2]);
             break;
 
@@ -43,7 +45,6 @@ int main(int argc, char *argv[]){
 
 }
 
-
 static void help(void)
 {
 	printf( "Usage: main.exe [options] ...\n"
@@ -53,4 +54,16 @@ static void help(void)
 		"  -c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n");
 }
 
+static void readData(char *argv[]){
 
+    cout << "read Data started, pathfile in entry : " << endl;
+    cout << argv[2] << endl;
+
+    Data* test = new Data();
+
+    test->print();
+
+    test->readFile(argv[2]);
+
+    test->print();
+}
