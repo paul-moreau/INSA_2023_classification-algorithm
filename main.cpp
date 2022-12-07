@@ -64,9 +64,7 @@ static void readData(char *argv[],int argc){
     if(argc>3){
         cout << "training ? " << argv[3] << endl;
         string train = argv[3];
-        for(auto & c : train){
-            c = toupper(c);
-        }
+        upper(train);
         if(train=="TRUE"){
             training = true;
         }else{
@@ -77,17 +75,17 @@ static void readData(char *argv[],int argc){
         cout << "percentage of the file : " << argv[4] << endl;
     }
     cout << "bool training is = " << training << endl;
-    /*Data* test = new Data();
+    Data* test = new Data();
 
     test->print();
 
-    test->readFile(argv[2]);
+    test->readFile(argv[2], "DataTrainingTest.txt", training, stoi(argv[4]));
 
     test->print();
 
     int nbOf2 = test->howMuch(2);
     cout << "There are " << nbOf2 << " data to describe the 2" << endl;
 
-    delete test;*/
+    delete test;
     
 }

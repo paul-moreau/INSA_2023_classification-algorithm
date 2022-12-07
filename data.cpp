@@ -38,9 +38,9 @@ void Data::print() const{
 //lit un fichier et remplit la multimap de la class Data
 //TODO: réécrire dans un fichier dont on connait l'entete ? 
 //TODO: ajouter du debug/des tests unitaires/de la gestion d'erreur ? (si le fichier existe pas ? si la "trame" du fichier n'est pas celle attendue ?)
-int Data::readFile(string pathFile){
-    ifstream fileRead (pathFile, ios::in);
-
+int Data::readFile(string pathFileReaded, string pathFileWrote, bool training, int rate){
+    ifstream fileRead (pathFileReaded, ios::in);
+    _training = training;
     //File read and extraction of data to put them in Data class attributes 
     if(fileRead)
     {
@@ -79,7 +79,6 @@ int Data::readFile(string pathFile){
     //utile pour debug
     multimap<int,vector<float>>::iterator it;
     int nombreData = 0;
-    int test =0;
     //cout << "_data contains:\n";
     for (it=_data.begin(); it!=_data.end(); ++it){
         nombreData++;
@@ -89,14 +88,34 @@ int Data::readFile(string pathFile){
         cout << "ERREUR: Données du fichier mal lues." << endl;
     }
     //cout<<endl;
-    //cout << "nb data = " << nombreData << endl;
+    cout << "nb data = " << nombreData << endl;
     
 
    //Début de gestion d'un fichier en écriture, à voir si on le fait et si oui quelle "trame" de fichier on choisit 
-    ofstream result ("dataRead.txt", ios::out);
+    ofstream result (pathFileWrote, ios::out);
+
+    //Prise en compte du rate
+    int nbDataPerFigure = (_nbData/10) * rate / 100;
+    _nbData = _nbData * rate / 100;
+
+    int compteur = 0;
+    int X = 100 - nbDataPerFigure;
+
+    multimap<int,vector<float>> dataWithRate;
+
+    for(it = _data.begin(); it != _data.end(); it++){
+        dataWithRate.insert(pair<int, vector<float>>((*it).first, (*it).second));
+        compteur++;
+         if(compteur == nbDataPerFigure){
+            compteur = 0;
+            for(int i=0;i<X;i++){
+                it++;
+            }
+        }
+    }
 
     if(result){
-        result << "nombreData=" << nombreData << "/";
+        result << "nombreData=" << nombreData*rate/100 << "/";
         result << "_nbData=" << _nbData << "/";
         result << "_SampleMax=" << _nbSampleMax << endl;
         for(it = _data.begin(); it != _data.end(); ++it){
@@ -107,6 +126,7 @@ int Data::readFile(string pathFile){
             result << endl;
         }
         result.close();
+        cout << endl;
     }else{
         cout << "ERREUR: Impossible d'ouvrir le fichier en écriture." << endl;
         return 0;

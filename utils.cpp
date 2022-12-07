@@ -15,7 +15,7 @@ vector<string> split (const string &s, char delim) {
     return result;
 }
 
-//Pas testée, pas sur que ça fonctionne
+//Testée, je crois que ça fonctionne
 void upper(string& s){
     for(auto &c : s){
             c = toupper(c);

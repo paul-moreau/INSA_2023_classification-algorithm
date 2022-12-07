@@ -30,7 +30,7 @@ class Data{
         bool isTraining() const {return _training;}
         multimap<int,vector<float>> getData() const {return _data;}
         
-        int readFile(string pathFile);
+        int readFile(string pathFileReaded, string pathFileWrote, bool training, int rate=100);
         int howMuch(int key) const;
         
 };
