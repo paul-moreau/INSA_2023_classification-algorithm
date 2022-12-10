@@ -2,9 +2,7 @@
 #include <iostream>
 #include <getopt.h>
 #include "data.hpp"
-#include "data.cpp"
 
-using namespace std;
 
 static void help(void);
 static void readData(char *argv[],int argc);
@@ -21,17 +19,20 @@ int main(int argc, char *argv[]){
     int p=0;
     c = getopt_long(argc, argv, "hr:g:c :", opts,
             &option_index);
+
     switch (c)
     {
         case 'h':
-            cout << "you hit help" << endl;
-            cout << "argc = " << argc << endl;
-            //help();
+            help();
             break;
 
         case 'r':
             //cout << "you hit readData" << endl;
             readData(argv, argc);
+            //int abcd = stoi("1");
+            /*int abc ;
+            abc = stoi("1");
+            cout << abc << endl;*/
             break;
 
         case 'g':
@@ -56,10 +57,13 @@ static void help(void)
 }
 
 static void readData(char *argv[],int argc){
-
+    printAllArguments(argc, argv);
+    cout << "-----------MAIN  STARTED-----------" << endl;
     cout << "argc = " << argc << endl;
     cout << "read Data started, pathfile in entry : " << argv[2] << endl;
-
+    cout << "pathfile in exit : " << argv[5] << endl;
+    string testString = argv[5];
+    cout << testString << endl;
     bool training = 4;
     if(argc>3){
         cout << "training ? " << argv[3] << endl;
@@ -75,17 +79,19 @@ static void readData(char *argv[],int argc){
         cout << "percentage of the file : " << argv[4] << endl;
     }
     cout << "bool training is = " << training << endl;
-    Data* test = new Data();
+    Data test;
+    cout << "------------MAIN  ENDED------------" << endl;
+    test.print();
 
-    test->print();
 
-    test->readFile(argv[2], "DataTrainingTest.txt", training, stoi(argv[4]));
 
-    test->print();
+    test.useFile(argv[2], testString, training, stoi(argv[4]));
 
-    int nbOf2 = test->howMuch(2);
+    test.print();
+
+    int nbOf2 = test.howMuch(2);
     cout << "There are " << nbOf2 << " data to describe the 2" << endl;
 
-    delete test;
+
     
 }

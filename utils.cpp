@@ -1,7 +1,7 @@
-#include <vector>
-#include <string>
-#include <sstream>
 
+
+#include "utils.hpp"
+#include <iostream>
 //méthode split utile pour split une string en un vector de string avec un char delimiter comme ' ' par exemple
 vector<string> split (const string &s, char delim) {
     vector<string> result;
@@ -20,6 +20,14 @@ void upper(string& s){
     for(auto &c : s){
             c = toupper(c);
     }
+}
+
+void printAllArguments(int argc, char* argv[]){
+    cout << "--------PRINT ALL ARGUMENTS--------" << endl;
+    for(int i=0;i<argc;i++){
+        cout << argv[i] << endl;
+    }
+    cout << "-----PRINT ALL ARGUMENTS ENDED-----" << endl;
 }
 
 //A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement

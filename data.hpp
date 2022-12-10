@@ -3,12 +3,8 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <string>
 #include <map>
-
-using namespace std;
-
+#include "utils.hpp"
 
 class Data{
     private:
@@ -30,7 +26,12 @@ class Data{
         bool isTraining() const {return _training;}
         multimap<int,vector<float>> getData() const {return _data;}
         
-        int readFile(string pathFileReaded, string pathFileWrote, bool training, int rate=100);
+        int useFile(string pathFileReaded, string pathFileWrote, bool training, int rate=100);
+        int writeFile(string pathFile);
+        vector<string> readFile(string pathFile) const;
+        void readData(vector<string> lines);
+        void applyRate2Data(int rate);
+
         int howMuch(int key) const;
         
 };
