@@ -6,6 +6,7 @@
 
 static void help(void);
 static void readData(char *argv[],int argc);
+static void guess(char *argv[],int argc);
 
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
@@ -37,6 +38,7 @@ int main(int argc, char *argv[]){
 
         case 'g':
             cout << "you hit guess" << endl;
+            guess(argv, argc);
             break;
 
         case 'c':
@@ -49,21 +51,21 @@ int main(int argc, char *argv[]){
 
 static void help(void)
 {
-	printf( "Usage: main.exe [options] ...\n"
+	printf( "UsageTest: main.exe [options] ...\n"
 		"  -h --help\t\t\tPrint this help message\n"
 		"  -r --readData\t\t\tStore data from <file> in memory\n"
 		"  -g --guess\t\t\tUse <algorithm> for <file> for <k> elements\n"
 		"  -c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n");
 }
 
-static void readData(char *argv[],int argc){
+//TODO: gérer l'ordre des arguments pour que ça soit peut être + logique
+//TODO: surement possible de le faire avec un switch et en mettant un préfixe à chaque argument genre 'FILE', "exemple.txt", "TRAINING", true... etc
+static void readData(char *argv[], int argc){
     printAllArguments(argc, argv);
     cout << "-----------MAIN  STARTED-----------" << endl;
     cout << "argc = " << argc << endl;
     cout << "read Data started, pathfile in entry : " << argv[2] << endl;
     cout << "pathfile in exit : " << argv[5] << endl;
-    string testString = argv[5];
-    cout << testString << endl;
     bool training = 4;
     if(argc>3){
         cout << "training ? " << argv[3] << endl;
@@ -75,23 +77,35 @@ static void readData(char *argv[],int argc){
             training = false;
         }
     }
-    if(argc>4){
+    if(argc>4) {
         cout << "percentage of the file : " << argv[4] << endl;
     }
+    string position = argv[6];
+    upper(position);
     cout << "bool training is = " << training << endl;
     Data test;
     cout << "------------MAIN  ENDED------------" << endl;
     test.print();
-
-
-
-    test.useFile(argv[2], testString, training, stoi(argv[4]));
-
+    test.useFile(argv[2], argv[5], training, position, stoi(argv[4]));
     test.print();
-
     int nbOf2 = test.howMuch(2);
     cout << "There are " << nbOf2 << " data to describe the 2" << endl;
 
 
     
+}
+
+static void guess(char *argv[], int argc){
+    printAllArguments(argc, argv);
+    cout << "guess started, files in entry :" << endl;
+    cout << "\tfor training : " << argv[2] << endl;
+    cout << "\tfor testing : " << argv[3] << endl;
+
+    Data dataTrain;
+    dataTrain.readExistingFile(argv[2]);
+    dataTrain.print();
+
+    Data dataTest;
+    dataTrain.readExistingFile(argv[3]);
+    dataTrain.print();
 }
