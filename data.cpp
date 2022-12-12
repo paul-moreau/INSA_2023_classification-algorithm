@@ -1,6 +1,4 @@
 #include "data.hpp"
-#include "utils.cpp"
-
 //default constructor of class Data
 Data::Data(){
     _nbData = 0;
@@ -28,78 +26,129 @@ Data::~Data(){
 //Print all arguments of class Data except the multimap
 //TODO: surcharge de l'opérateur << ?
 void Data::print() const{
+    cout << "------------PRINT  DATA------------" << endl;
     cout << "Data d'entrainement :" << _training << endl;
     cout << "nombre de Data differentes : " << endl;
     cout << this->_nbData << endl;
     cout << "nombre de Samples Maximal par Data : " << endl;
     cout << this->_nbSampleMax << endl;
+    cout << "-----------------------------------" << endl;
 }
 
 //lit un fichier et remplit la multimap de la class Data
-//TODO: réécrire dans un fichier dont on connait l'entete ? 
-//TODO: ajouter du debug/des tests unitaires/de la gestion d'erreur ? (si le fichier existe pas ? si la "trame" du fichier n'est pas celle attendue ?)
-int Data::readFile(string pathFile){
-    ifstream fileRead (pathFile, ios::in);
+//TODO: ajouter du debug/de la gestion d'erreur ? (si le fichier existe pas ? si la "trame" du fichier n'est pas celle attendue ?)
+int Data::useFile(string pathFileReaded, string pathFileWrote, bool training, string position, int rate){
 
-    //File read and extraction of data to put them in Data class attributes 
-    if(fileRead)
-    {
-        string line;
-        vector<string> lines;
-        while(getline(fileRead,line)){
-            lines.push_back(line);
-        }
-        fileRead.close();
+    vector<string> lines = readFile(pathFileReaded);
+    cout << "position = " << position << endl;
+    _training = training;
+    _nbData = stoi(lines[0]);
+    _nbSampleMax = stoi(lines[1]);
 
-        _nbData = stoi(lines[0]);
-        _nbSampleMax = stoi(lines[1]);
+    readData(lines);
 
-        //_data : string to int for key and string to float for caracteristics values, all in the multimap
-        for (int i=2;i<_nbData+2;i++){
-
-            vector<string> oneLineOfData = split(lines[i],' ');
-
-            vector<float> tempDatas;
-            for(int j=1;j<_nbSampleMax+1;j++){
-                tempDatas.push_back(stof(oneLineOfData[j]));
-            }
-            int key = stoi(oneLineOfData[0]);
-
-            _data.insert(pair<int, vector<float>>(key, tempDatas));
-        }
-    }
-    else
-    {
-        cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
-        return 0;
-    }
-    
-    //Affichage de toute les clés de la multimap
-    //Comptage puis affichage du nombre de clés de la multimap
+    //Comptage du nombre de clés de la multimap
     //utile pour debug
     multimap<int,vector<float>>::iterator it;
     int nombreData = 0;
-    int test =0;
-    //cout << "_data contains:\n";
     for (it=_data.begin(); it!=_data.end(); ++it){
         nombreData++;
-        //cout << (*it).first << ' ';
     }
     if(nombreData != _nbData){
         cout << "ERREUR: Données du fichier mal lues." << endl;
     }
-    //cout<<endl;
-    //cout << "nb data = " << nombreData << endl;
-    
 
-   //Début de gestion d'un fichier en écriture, à voir si on le fait et si oui quelle "trame" de fichier on choisit 
-    ofstream result ("dataRead.txt", ios::out);
+    applyRate2Data(rate,position);
+    writeFile(pathFileWrote);
+
+    return 1;
+}
+
+//lit un fichier
+//TODO: A mettre dans utils ?
+vector<string> Data::readFile(string pathFile) const{
+
+    ifstream fileRead (pathFile, ios::in);
+    vector<string> lines;
+    if(fileRead) {
+        string line;
+        while (getline(fileRead, line)) {
+            lines.push_back(line);
+        }
+        fileRead.close();
+    }
+    else{
+        cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+    }
+    return lines;
+}
+
+//met le résultat de readFile dans _data
+void Data::readData(vector<string> lines){
+    for (int i=2;i<_nbData+2;i++){
+        vector<string> oneLineOfData = split(lines[i],' ');
+        vector<float> tempDatas;
+        for(int j=1;j<_nbSampleMax+1;j++){
+            tempDatas.push_back(stof(oneLineOfData[j]));
+        }
+        int key = stoi(oneLineOfData[0]);
+        _data.insert(pair<int, vector<float>>(key, tempDatas));
+    }
+}
+
+//Applique un taux à _data
+//TODO gérer le fait d'une division donnant un résultat non entier, ici pas pris en compte
+void Data::applyRate2Data(int rate, string position){
+
+
+
+    int nbDataPerFigure = (_nbData/10) * rate / 100;
+    _nbData = _nbData * rate / 100;
+
+    int compteur = 0;
+    int X = 100 - nbDataPerFigure;
+
+    multimap<int,vector<float>> dataWithRate;
+    if(position=="START"){
+        multimap<int,vector<float>>::iterator it;
+        for(it = _data.begin(); it != _data.end(); it++){
+            dataWithRate.insert(pair<int, vector<float>>((*it).first, (*it).second));
+            compteur++;
+            if(compteur == nbDataPerFigure){
+                compteur = 0;
+                for(int i=0;i<X;i++){
+                    it++;
+                }
+            }
+        }
+    }else{
+        multimap<int,vector<float>>::reverse_iterator it;
+        for(it = _data.rbegin(); it != _data.rend(); it++){
+            dataWithRate.insert(pair<int, vector<float>>((*it).first, (*it).second));
+            compteur++;
+            if(compteur == nbDataPerFigure){
+                compteur = 0;
+                for(int i=0;i<X;i++){
+                    it++;
+                }
+            }
+        }
+    }
+    _data = dataWithRate;
+}
+
+//Ecrit _data dans un fichier
+int Data::writeFile(string pathFile){
+
+    ofstream result (pathFile, ios::out);
+    cout << "write file in " << pathFile << " started" << endl;
+    multimap<int,vector<float>>::iterator it;
 
     if(result){
-        result << "nombreData=" << nombreData << "/";
         result << "_nbData=" << _nbData << "/";
-        result << "_SampleMax=" << _nbSampleMax << endl;
-        for(it = _data.begin(); it != _data.end(); ++it){
+        result << "_SampleMax=" << _nbSampleMax << "/";
+        result << "_training=" << _training << endl;
+        for(it = _data.begin(); it != _data.end(); it++){
             result << (*it).first << " " ;
             for(float f : (*it).second){
                 result << f << " ";
@@ -107,11 +156,49 @@ int Data::readFile(string pathFile){
             result << endl;
         }
         result.close();
+        cout << endl;
+        return 1;
     }else{
         cout << "ERREUR: Impossible d'ouvrir le fichier en écriture." << endl;
         return 0;
     }
-    
+}
+
+int Data::readExistingFile(string pathFile){
+    //cout << "coucou" << endl;
+    vector<string> lines = readFile(pathFile);
+    vector<string> firstLine = split(lines[0],'/');
+    for (string s : firstLine){
+        vector<string> arguments = split(s,'=');
+        //cout << "arguments 0 = " << arguments[0] << endl;
+        //cout << "arguments 1 = " << arguments[1] << endl;
+        if(arguments[0]=="_nbData"){
+            _nbData = stoi(arguments[1]);
+        }else if(arguments[0]=="_SampleMax"){
+            //cout << "coucou SampleMax" << endl;
+            //cout << "stoi argument[1] = " << stoi(arguments[1]) << endl;
+            _nbSampleMax = stoi(arguments[1]);
+        }else if(arguments[0]=="_training"){
+            int train = stoi(arguments[1]);
+            //cout << "coucou training" << endl;
+            if(train==1){
+                _training = true;
+            }else{
+                _training = false;
+            }
+        }
+    }
+    //cout << "coucou" << endl;
+    for (int i=1;i<_nbData+1;i++){
+        vector<string> oneLineOfData = split(lines[i],' ');
+        vector<float> tempDatas;
+        for(int j=1;j<_nbSampleMax+1;j++){
+            tempDatas.push_back(stof(oneLineOfData[j]));
+        }
+        int key = stoi(oneLineOfData[0]);
+        _data.insert(pair<int, vector<float>>(key, tempDatas));
+    }
+    //cout << "coucou" << endl;
     return 1;
 }
 
@@ -138,3 +225,6 @@ int Data::howMuch(int key) const {
     }
     return res;
 }
+
+
+
