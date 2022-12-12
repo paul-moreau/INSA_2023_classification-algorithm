@@ -11,4 +11,4 @@ add_executable(INSA_2022_classification_algorithm
         data.cpp
         data.hpp
         main.cpp
-        utils.cpp utils.hpp)
+        utils.cpp utils.hpp algorithm1.cpp)

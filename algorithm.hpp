@@ -8,8 +8,6 @@ using namespace std;
 
 class Algorithm{
     public:
-        Algorithm();
-        virtual ~Algorithm();
         virtual vector<int> traiter(Data dataRef, Data dataUnderTest) = 0;
 };
 #endif

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <getopt.h>
 #include "data.hpp"
+#include "algorithm1.hpp"
 
 
 static void help(void);
@@ -28,16 +29,10 @@ int main(int argc, char *argv[]){
             break;
 
         case 'r':
-            //cout << "you hit readData" << endl;
             readData(argv, argc);
-            //int abcd = stoi("1");
-            /*int abc ;
-            abc = stoi("1");
-            cout << abc << endl;*/
             break;
 
         case 'g':
-            cout << "you hit guess" << endl;
             guess(argv, argc);
             break;
 
@@ -58,6 +53,8 @@ static void help(void)
 		"  -c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n");
 }
 
+//TODO: rendre tout ça plus propre de manière générale
+//TODO: ajouter commentaires
 //TODO: gérer l'ordre des arguments pour que ça soit peut être + logique
 //TODO: surement possible de le faire avec un switch et en mettant un préfixe à chaque argument genre 'FILE', "exemple.txt", "TRAINING", true... etc
 static void readData(char *argv[], int argc){
@@ -108,4 +105,11 @@ static void guess(char *argv[], int argc){
     Data dataTest;
     dataTrain.readExistingFile(argv[3]);
     dataTrain.print();
+    cout << "coucou" << endl;
+    Algorithm1 algo;
+    vector<int> result = algo.traiter(dataTrain,dataTest);
+    cout << "coucou" << endl;
+    for(int i : result){
+        cout << i << endl;
+    }
 }
