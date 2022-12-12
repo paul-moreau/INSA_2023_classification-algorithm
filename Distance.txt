@@ -1,0 +1,49 @@
+vector<float> distances;
+
+for(int j=0;j<nbData;j++){           //nbData = 1000
+    float distance = 0;
+    for(int i=0;i<nbSample2Use;i++){    //nbSample2Use = 70
+        distance += samplesUnderTest[i]-sample[i];
+    }
+    distances.push_back(distance);
+}
+
+// OU
+//moyenne des X datas pour chaque Sample SY :
+for (int i = 0; i<nbData ; i++){    //nbData = 1000/100 = 10
+    float distance = 0;
+    for(int j=0;j<nbSample2Use;j++){    //nbSample2Use = 70
+        distance += samplesUnderTest[j]-sample[j];
+    }
+    distances.push_back(distance);
+}
+
+//OU
+//moyenne des Sample SY pour chaque data X
+for (int i = 0; i<nbData ; i++){    //nbData = 1000
+    float distance = moyenne(sampleUnderTest) - moyenne(sample);
+    distances.push_back(distance);
+}
+
+//OU
+//Moyenne des samples et des datas
+for (int i = 0; i<nbData ; i++){    //nbData = 1000/10 = 10
+    float distance = moyenne(sampleUnderTest) - moyenne(sample);
+    distances.push_back(distance);
+}
+
+distance la + proche de 0 parmis les valeurs du vector distances
+
+
+Deux points : X(x1,x2,x3,...,xN) et Y(y1,y2,y3,...,yN)
+
+Distance Manhattan, 1-distance (angles droits):
+sqrt(sum(|xI-yI|), from I=1 to I=n)
+
+Distance euclidienne, 2-distance (ligne droite):
+sqrt(sum((xI-yI)^2), from I=1 to I=n)
+
+Distance de Minkowski, p-distance :
+sqrt(sum((xI-yI)^p), from I=1 to I=n)
+
+
