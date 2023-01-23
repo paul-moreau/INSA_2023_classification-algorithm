@@ -27,11 +27,17 @@ Data::~Data(){
 //TODO: surcharge de l'opérateur << ?
 void Data::print() const{
     cout << "------------PRINT  DATA------------" << endl;
-    cout << "Data d'entrainement :" << _training << endl;
-    cout << "nombre de Data differentes : " << endl;
+    cout << "Data d'entrainement : " << _training << endl;
+    cout << "nombre de Data differentes : ";
     cout << this->_nbData << endl;
-    cout << "nombre de Samples Maximal par Data : " << endl;
+    cout << "nombre de Samples Maximal par Data : ";
     cout << this->_nbSampleMax << endl;
+    multimap<int,vector<float>>::iterator it;
+    multimap<int,vector<float>> data = this->getData();
+    /*for(it = data.begin();it!= data.end(); ++it){
+        cout << "it.first = " << (*it).first;
+        cout << " and it.second.size = " << (*it).second.size() << endl;
+    }*/
     cout << "-----------------------------------" << endl;
 }
 

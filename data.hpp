@@ -24,7 +24,7 @@ class Data{
         int getNbData() const {return _nbData;}
         int getNbSampleMax() const {return _nbSampleMax;}
         bool isTraining() const {return _training;}
-        multimap<int,vector<float>> getData() const {return _data;}
+        multimap<int,vector<float>> getData() const& {return _data;}
         
         int useFile(string pathFileReaded, string pathFileWrote, bool training, string position, int rate=100);
         int writeFile(string pathFile);

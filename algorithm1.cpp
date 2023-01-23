@@ -10,34 +10,19 @@ Algorithm1::~Algorithm1(){
 
 vector<int> Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
 
-    cout << "coucou" << endl;
-
     multimap<int,vector<float>>::iterator itRef;
     multimap<int, vector<float>> ref;
     ref = dataRef.getData();
 
-    cout << "coucou" << endl;
-
     multimap<int,vector<float>>::iterator itTest;
     multimap<int, vector<float>> test;
-    //Problème au niveau du getter ?
     test = dataUnderTest.getData();
 
     vector<int> result;
 
-    cout << "coucou" << endl;
-
-    itTest = test.begin();
-    cout << (*itTest).first << endl;
-    cout << (*itTest).second.size() << endl;
-    itTest = test.end();
-    cout << (*itTest).first << endl;
-    cout << (*itTest).second.size() << endl;
-
     for(itTest = test.begin(); itTest != test.end(); itTest++){
-        cout << "coucou1" << endl;
         vector<float> diff;
-        for(itRef = ref.begin(); itRef != ref.begin(); itRef++){
+        for(itRef = ref.begin(); itRef != ref.end(); itRef++){
             vector<float> diffPerSample;
             vector<float> vecTest = (*itTest).second;
             vector<float> vecRef = (*itRef).second;
@@ -45,14 +30,13 @@ vector<int> Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
                 float difference = abs(vecTest[i]-vecRef[i]);
                 diffPerSample.push_back(difference);
             }
-            float sum;
+            float sum = 0;
             for(int i=0;i<diffPerSample.size();i++){
                 sum += diffPerSample[i];
             }
             float mean = sum/diffPerSample.size();
             diff.push_back(mean);
         }
-        cout << "coucou2" << endl;
         float min = diff[0];
         int indMin = 0;
         for(int i=1;i<diff.size();i++){
@@ -61,7 +45,6 @@ vector<int> Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
                 indMin = i;
             }
         }
-        cout << "coucou3" << endl;
         int j=0;
         for(itRef=ref.begin();itRef!=ref.end();itRef++){
             if(j==indMin){
@@ -70,11 +53,6 @@ vector<int> Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
             }
             j++;
         }
-        cout << "coucou4" << endl;
-    }
-    cout << "coucou end traiter" << endl;
-    for(int i : result){
-        cout << i << endl;
     }
     return result;
 }

@@ -103,12 +103,10 @@ static void guess(char *argv[], int argc){
     dataTrain.print();
 
     Data dataTest;
-    dataTrain.readExistingFile(argv[3]);
-    dataTrain.print();
-    cout << "coucou" << endl;
+    dataTest.readExistingFile(argv[3]);
+    dataTest.print();
     Algorithm1 algo;
     vector<int> result = algo.traiter(dataTrain,dataTest);
-    cout << "coucou" << endl;
     for(int i : result){
         cout << i << endl;
     }
