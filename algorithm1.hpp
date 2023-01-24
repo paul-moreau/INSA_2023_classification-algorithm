@@ -8,13 +8,13 @@
 using namespace std;
 
 class Algorithm1 : public Algorithm{
-    private:
-        int _nbSample2Use;
+
     public:
         Algorithm1();
         ~Algorithm1();
 
-        vector<int> traiter(Data dataRef, Data dataUnderTest);
+        int traiter(Data dataRef, Data dataUnderTest);
+        void const print();
 
 };
 #endif
