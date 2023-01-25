@@ -9,10 +9,10 @@ using namespace std;
 class Algorithm{
     protected:
         int _nbSample2Use;
-        vector<int> _result;
+        vector<int> _predictedResult;
     public:
-        virtual int traiter(Data dataRef, Data dataUnderTest) = 0;
-        vector<int> getResult() const& {return _result;};
+        virtual void traiter(Data dataRef, Data dataUnderTest) = 0;
+        vector<int> getPredictedResult() const& {return _predictedResult;};
         virtual void const print()=0;
 };
 #endif

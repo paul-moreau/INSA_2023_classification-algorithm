@@ -16,7 +16,7 @@ class Data{
     public:
         Data();
         Data(int nbData, int nbSampleMax, bool training);
-        ~Data();
+        //~Data();
 
         void print() const;
 

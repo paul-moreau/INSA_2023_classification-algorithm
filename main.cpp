@@ -3,6 +3,7 @@
 #include <getopt.h>
 #include "data.hpp"
 #include "algorithm1.hpp"
+#include "compareAlgo.hpp"
 
 
 static void help(void);
@@ -15,7 +16,21 @@ static struct option opts[] = {
 	{ "guess", 1, 0, 'g' },
 	{ "compare", 1, 0, 'c' },
 };
+/*int main(){
+    Data dataTrain;
+    dataTrain.readExistingFile("../data/train.txt");
+    dataTrain.print();
 
+    Data dataTest;
+    dataTest.readExistingFile("../data/test.txt");
+    dataTest.print();
+
+    Algorithm1* algo = new Algorithm1();
+    algo->print();
+    vector<int> a = algo->traiter(dataTrain,dataTest);
+    cout << "coucou en dehors de la fonction " << endl;
+    algo->print();
+}*/
 int main(int argc, char *argv[]){
     int c, option_index = 0;
     int p=0;
@@ -44,12 +59,11 @@ int main(int argc, char *argv[]){
 
 }
 
-static void help(void)
-{
+static void help(void){
 	printf( "UsageTest: main.exe [options] ...\n"
 		"  -h --help\t\t\tPrint this help message\n"
 		"  -r --readData\t\t\tStore data from <file> in memory\n"
-		"  -g --guess\t\t\tUse <algorithm> for <file> for <k> elements\n"
+		"  -g --guess\t\t\tUse <algorithm> for <files> for <k> elements\n"
 		"  -c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n");
 }
 
@@ -88,8 +102,6 @@ static void readData(char *argv[], int argc){
     int nbOf2 = test.howMuch(2);
     cout << "There are " << nbOf2 << " data to describe the 2" << endl;
 
-
-    
 }
 
 static void guess(char *argv[], int argc){
@@ -108,7 +120,9 @@ static void guess(char *argv[], int argc){
 
     Algorithm1* algo = new Algorithm1();
     algo->print();
-    int a = algo->traiter(dataTrain,dataTest);
-    cout << "coucou" << endl;
+    cout << "entrée dans la fonction" << endl;
+    algo->traiter(dataTrain,dataTest);
+    cout << "sortie de la fonction" << endl;
     algo->print();
+
 }

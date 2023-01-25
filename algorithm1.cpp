@@ -12,15 +12,14 @@ const void Algorithm1::print() {
     cout << "------------PRINT  Algo1------------" << endl;
     cout << "Number of sample to use = " << _nbSample2Use << endl;
     cout << "Affichage de result : " << endl;
-    for(int i : _result){
+    for(int i : _predictedResult){
         cout << i << " ";
     }
     cout << endl;
     cout << "-----------------------------------" << endl;
 }
 
-int Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
-    cout << "coucou" << endl;
+void Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
     multimap<int,vector<float>>::iterator itRef;
     multimap<int, vector<float>> ref;
     ref = dataRef.getData();
@@ -57,13 +56,10 @@ int Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
         int j=0;
         for(itRef=ref.begin();itRef!=ref.end();itRef++) {
             if (j == indMin) {
-                _result.push_back((*itRef).first);
+                _predictedResult.push_back((*itRef).first);
                 itRef = ref.end();
             }
             j++;
         }
     }
-    cout << "coucou ds la fct" << endl;
-    this->print();
-    return 0;
 }

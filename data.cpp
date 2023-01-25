@@ -14,14 +14,21 @@ Data::Data(int nbData, int nbSampleMax, bool training){
 }
 
 //Est ce que ça marche ? en tous cas ça compile
-Data::~Data(){
+//Spoiler : ça marchait pas
+//for ( LO_Index ::iterator i = _index->begin(); i != _index->end(); i++ ) delete (*i).second; // Delete all ensortinges in the index _index->erase( _index->begin(), _index->end() );
+//Apparemment c'est pas nécessaire
+/*Data::~Data(){
+    delete[] _data;
+    for(multimap< int, vector<float> >::iterator it = _data.begin(); it != _data.end(); ++it){
+        cout << "entrée destructeur" << endl;
+        (*it).second.~vector();
+    }
     multimap<int,vector<float>>::iterator it;
     for (it=_data.begin(); it!=_data.end(); ++it){
         delete &(*it).first;
         delete[] &(*it).second;
     }
-
-}
+}*/
 
 //Print all arguments of class Data except the multimap
 //TODO: surcharge de l'opérateur << ?
@@ -32,9 +39,9 @@ void Data::print() const{
     cout << this->_nbData << endl;
     cout << "nombre de Samples Maximal par Data : ";
     cout << this->_nbSampleMax << endl;
-    multimap<int,vector<float>>::iterator it;
+    /*multimap<int,vector<float>>::iterator it;
     multimap<int,vector<float>> data = this->getData();
-    /*for(it = data.begin();it!= data.end(); ++it){
+    for(it = data.begin();it!= data.end(); ++it){
         cout << "it.first = " << (*it).first;
         cout << " and it.second.size = " << (*it).second.size() << endl;
     }*/

@@ -13,7 +13,7 @@ class Algorithm1 : public Algorithm{
         Algorithm1();
         ~Algorithm1();
 
-        int traiter(Data dataRef, Data dataUnderTest);
+        void traiter(Data dataRef, Data dataUnderTest);
         void const print();
 
 };

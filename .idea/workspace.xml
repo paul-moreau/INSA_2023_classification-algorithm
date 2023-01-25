@@ -71,6 +71,11 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.INSA_2022_classification_algorithm">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="INSA_2022_classification_algorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="INSA_2022_classification_algorithm" TARGET_NAME="INSA_2022_classification_algorithm" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="INSA_2022_classification_algorithm" RUN_TARGET_NAME="INSA_2022_classification_algorithm">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -103,7 +108,11 @@
       <workItem from="1674465950084" duration="2883000" />
       <workItem from="1674471944953" duration="1734000" />
       <workItem from="1674505057883" duration="1833000" />
-      <workItem from="1674562704408" duration="5115000" />
+      <workItem from="1674562704408" duration="5711000" />
+      <workItem from="1674587326179" duration="38000" />
+      <workItem from="1674587641985" duration="1504000" />
+      <workItem from="1674637942930" duration="2756000" />
+      <workItem from="1674647089640" duration="3096000" />
     </task>
     <servers />
   </component>
