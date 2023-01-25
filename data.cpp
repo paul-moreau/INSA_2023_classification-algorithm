@@ -112,9 +112,6 @@ void Data::readData(vector<string> lines){
 //Applique un taux à _data
 //TODO gérer le fait d'une division donnant un résultat non entier, ici pas pris en compte
 void Data::applyRate2Data(int rate, string position){
-
-
-
     int nbDataPerFigure = (_nbData/10) * rate / 100;
     _nbData = _nbData * rate / 100;
 
