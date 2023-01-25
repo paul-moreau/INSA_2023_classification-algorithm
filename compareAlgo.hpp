@@ -20,7 +20,9 @@ class CompareAlgo {
 
 public:
     CompareAlgo(Data data4Testing, Data data4Training);
-    void testerAlgo(vector<Algorithm> algos2Test);
+    void whichAlgo(vector<Algorithm*> algos2Test);
+    void testerAlgo();
+    void print();
 };
 
 

@@ -9,6 +9,7 @@
 static void help(void);
 static void readData(char *argv[],int argc);
 static void guess(char *argv[],int argc);
+static void compare(char *argv[], int argc);
 
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
@@ -27,10 +28,15 @@ static struct option opts[] = {
 
     Algorithm1* algo = new Algorithm1();
     algo->print();
-    vector<int> a = algo->traiter(dataTrain,dataTest);
-    cout << "coucou en dehors de la fonction " << endl;
-    algo->print();
+    algo->traiter(dataTrain,dataTest);
+    //algo->print();
+    CompareAlgo* comparatif = new CompareAlgo(dataTest,dataTrain);
+    vector<Algorithm*> algos2Test;
+    algos2Test.push_back(algo);
+    comparatif->whichAlgo(algos2Test);
+    comparatif->testerAlgo();
 }*/
+
 int main(int argc, char *argv[]){
     int c, option_index = 0;
     int p=0;
@@ -52,7 +58,7 @@ int main(int argc, char *argv[]){
             break;
 
         case 'c':
-            cout << "you hit compare" << endl;
+            compare(argv, argc);
             break;
     }
     return 0;
@@ -125,4 +131,31 @@ static void guess(char *argv[], int argc){
     cout << "sortie de la fonction" << endl;
     algo->print();
 
+}
+
+static void compare(char *argv[], int argc){
+    Data dataTrain;
+    dataTrain.readExistingFile(argv[2]);
+    dataTrain.print();
+
+    Data dataTest;
+    dataTest.readExistingFile(argv[3]);
+    dataTest.print();
+
+    CompareAlgo* comparatif = new CompareAlgo(dataTest,dataTrain);
+
+    vector<Algorithm*> algos2Test;
+    Algorithm1* algo = new Algorithm1();
+
+    algos2Test.push_back(algo);
+    cout << "coucou" << endl;
+    comparatif->print();
+    cout << "coucou" << endl;
+    comparatif->whichAlgo(algos2Test);
+    cout << "coucou" << endl;
+    comparatif->print();
+    cout << "coucou" << endl;
+    comparatif->testerAlgo();
+    cout << "coucou" << endl;
+    comparatif->print();
 }
