@@ -3,6 +3,7 @@
 #include <getopt.h>
 #include "data.hpp"
 #include "algorithm1.hpp"
+#include "algorithm2.hpp"
 #include "compareAlgo.hpp"
 
 
@@ -79,7 +80,6 @@ static void help(void){
 //TODO: surement possible de le faire avec un switch et en mettant un préfixe à chaque argument genre 'FILE', "exemple.txt", "TRAINING", true... etc
 static void readData(char *argv[], int argc){
     printAllArguments(argc, argv);
-    cout << "-----------MAIN  STARTED-----------" << endl;
     cout << "argc = " << argc << endl;
     cout << "read Data started, pathfile in entry : " << argv[2] << endl;
     cout << "pathfile in exit : " << argv[5] << endl;
@@ -145,9 +145,11 @@ static void compare(char *argv[], int argc){
     CompareAlgo* comparatif = new CompareAlgo(dataTest,dataTrain);
 
     vector<Algorithm*> algos2Test;
-    Algorithm1* algo = new Algorithm1();
+    Algorithm2* algo = new Algorithm2();
+    Algorithm1* algo1 = new Algorithm1();
 
     algos2Test.push_back(algo);
+    algos2Test.push_back(algo1);
     cout << "coucou" << endl;
     comparatif->print();
     cout << "coucou" << endl;

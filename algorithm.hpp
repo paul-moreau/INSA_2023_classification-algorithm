@@ -10,9 +10,11 @@ class Algorithm{
     protected:
         int _nbSample2Use;
         vector<int> _predictedResult;
+        string _name;
     public:
         virtual void traiter(Data dataRef, Data dataUnderTest) = 0;
         vector<int> getPredictedResult() const& {return _predictedResult;};
-        virtual void const print()=0;
+        string getName() const {return _name;};
+        void const print();
 };
 #endif

@@ -7,12 +7,16 @@ include_directories(.)
 
 add_executable(INSA_2022_classification_algorithm
         algorithm.hpp
+        algorithm.cpp
         algorithm1.hpp
+        algorithm1.cpp
         data.cpp
         data.hpp
         main.cpp
         utils.cpp
         utils.hpp
-        algorithm1.cpp
         compareAlgo.cpp
-        compareAlgo.hpp)
+        compareAlgo.hpp
+        algorithm2.cpp
+        algorithm2.hpp
+        )
