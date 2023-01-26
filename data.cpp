@@ -35,9 +35,9 @@ Data::Data(int nbData, int nbSampleMax, bool training){
 void Data::print() const{
     cout << "------------PRINT  DATA------------" << endl;
     cout << "Data d'entrainement : " << _training << endl;
-    cout << "nombre de Data differentes : ";
+    cout << "Nombre de data differentes : ";
     cout << this->_nbData << endl;
-    cout << "nombre de Samples Maximal par Data : ";
+    cout << "Nombre de samples maximal par data : ";
     cout << this->_nbSampleMax << endl;
     /*multimap<int,vector<float>>::iterator it;
     multimap<int,vector<float>> data = this->getData();
@@ -53,7 +53,6 @@ void Data::print() const{
 int Data::useFile(string pathFileReaded, string pathFileWrote, bool training, string position, int rate){
 
     vector<string> lines = readFile(pathFileReaded);
-    cout << "position = " << position << endl;
     _training = training;
     _nbData = stoi(lines[0]);
     _nbSampleMax = stoi(lines[1]);
@@ -80,7 +79,7 @@ int Data::useFile(string pathFileReaded, string pathFileWrote, bool training, st
 //lit un fichier
 //TODO: A mettre dans utils ?
 vector<string> Data::readFile(string pathFile) const{
-
+    cout << "Read file in " << pathFile << " started" << endl;
     ifstream fileRead (pathFile, ios::in);
     vector<string> lines;
     if(fileRead) {
@@ -151,7 +150,7 @@ void Data::applyRate2Data(int rate, string position){
 int Data::writeFile(string pathFile){
 
     ofstream result (pathFile, ios::out);
-    cout << "write file in " << pathFile << " started" << endl;
+    cout << "Write file in " << pathFile << " started" << endl;
     multimap<int,vector<float>>::iterator it;
 
     if(result){
