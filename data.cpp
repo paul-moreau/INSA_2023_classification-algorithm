@@ -46,6 +46,7 @@ void Data::print() const{
         cout << " and it.second.size = " << (*it).second.size() << endl;
     }*/
     cout << "-----------------------------------" << endl;
+    cout << endl;
 }
 
 //lit un fichier et remplit la multimap de la class Data
@@ -155,8 +156,7 @@ int Data::writeFile(string pathFile){
 
     if(result){
         result << "_nbData=" << _nbData << "/";
-        result << "_SampleMax=" << _nbSampleMax << "/";
-        result << "_training=" << _training << endl;
+        result << "_SampleMax=" << _nbSampleMax <<endl;
         for(it = _data.begin(); it != _data.end(); it++){
             result << (*it).first << " " ;
             for(float f : (*it).second){
@@ -174,22 +174,17 @@ int Data::writeFile(string pathFile){
 }
 
 int Data::readExistingFile(string pathFile){
-    //cout << "coucou" << endl;
+
     vector<string> lines = readFile(pathFile);
     vector<string> firstLine = split(lines[0],'/');
     for (string s : firstLine){
         vector<string> arguments = split(s,'=');
-        //cout << "arguments 0 = " << arguments[0] << endl;
-        //cout << "arguments 1 = " << arguments[1] << endl;
         if(arguments[0]=="_nbData"){
             _nbData = stoi(arguments[1]);
         }else if(arguments[0]=="_SampleMax"){
-            //cout << "coucou SampleMax" << endl;
-            //cout << "stoi argument[1] = " << stoi(arguments[1]) << endl;
             _nbSampleMax = stoi(arguments[1]);
         }else if(arguments[0]=="_training"){
             int train = stoi(arguments[1]);
-            //cout << "coucou training" << endl;
             if(train==1){
                 _training = true;
             }else{
@@ -197,7 +192,6 @@ int Data::readExistingFile(string pathFile){
             }
         }
     }
-    //cout << "coucou" << endl;
     for (int i=1;i<_nbData+1;i++){
         vector<string> oneLineOfData = split(lines[i],' ');
         vector<float> tempDatas;
@@ -207,7 +201,6 @@ int Data::readExistingFile(string pathFile){
         int key = stoi(oneLineOfData[0]);
         _data.insert(pair<int, vector<float>>(key, tempDatas));
     }
-    //cout << "coucou" << endl;
     return 1;
 }
 

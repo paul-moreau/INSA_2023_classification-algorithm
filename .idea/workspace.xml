@@ -27,6 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ClangdSettings">
+    <option name="clangTidyViaClangd" value="false" />
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
@@ -113,6 +114,9 @@
       <workItem from="1674669805486" duration="5359000" />
       <workItem from="1674733630893" duration="325000" />
       <workItem from="1674733966374" duration="2872000" />
+      <workItem from="1674737610967" duration="1735000" />
+      <workItem from="1674739701256" duration="4075000" />
+      <workItem from="1674758605482" duration="5507000" />
     </task>
     <servers />
   </component>
