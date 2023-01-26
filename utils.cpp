@@ -49,7 +49,7 @@ bool enoughArguments(int argc, int choice){
             break;
 
         case 'g':
-            if(argc>1){
+            if(argc>=4){
                 res = true;
             }
             break;
@@ -70,7 +70,7 @@ bool notTooMuchArguments(int argc, int choice){
     bool res = true;
     switch(choice){
         case 'h':
-            if(argc<2){
+            if(argc>2){
                 res = false;
             }
             break;
@@ -81,7 +81,7 @@ bool notTooMuchArguments(int argc, int choice){
             break;
 
         case 'g':
-            if(argc<667){
+            if(argc>6){
                 res = false;
             }
             break;

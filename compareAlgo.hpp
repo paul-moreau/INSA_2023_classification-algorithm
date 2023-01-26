@@ -16,7 +16,7 @@ class CompareAlgo {
     private:
         Data _data4Testing;
         Data _data4Training;
-        multimap<Algorithm*,int> _percentagePerAlgo;
+        vector<Algorithm*> _algos;
 
 public:
     CompareAlgo(Data data4Testing, Data data4Training);
