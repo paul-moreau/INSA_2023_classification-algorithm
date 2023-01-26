@@ -14,7 +14,5 @@ class Algorithm1 : public Algorithm{
         ~Algorithm1();
 
         void traiter(Data dataRef, Data dataUnderTest);
-        void const print();
-
 };
 #endif

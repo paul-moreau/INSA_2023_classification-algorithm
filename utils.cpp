@@ -24,7 +24,8 @@ void upper(string& s){
 
 void printAllArguments(int argc, char* argv[]){
     cout << "--------PRINT ALL ARGUMENTS--------" << endl;
-    for(int i=0;i<argc;i++){
+    cout << "nombre d'arguments = " << argc - 2 << endl;
+    for(int i=2;i<argc;i++){
         cout << argv[i] << endl;
     }
     cout << "-----PRINT ALL ARGUMENTS ENDED-----" << endl;

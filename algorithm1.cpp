@@ -2,22 +2,14 @@
 
 Algorithm1::Algorithm1(){
     _nbSample2Use = 70;
+    _name = "Mean of absolutes differences between each samples";
 }
 
 Algorithm1::~Algorithm1(){
 
 }
 
-const void Algorithm1::print() {
-    cout << "------------PRINT  Algo1------------" << endl;
-    cout << "Number of sample to use = " << _nbSample2Use << endl;
-    cout << "Affichage de result : " << endl;
-    for(int i : _predictedResult){
-        cout << i << " ";
-    }
-    cout << endl;
-    cout << "-----------------------------------" << endl;
-}
+
 
 void Algorithm1::traiter(Data dataRef, Data dataUnderTest) {
     multimap<int,vector<float>>::iterator itRef;

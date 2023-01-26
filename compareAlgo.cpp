@@ -18,7 +18,7 @@ void CompareAlgo::print(){
     cout << "percentage per algo : " << endl;
     multimap<Algorithm*,int>::iterator it;
     for(it=_percentagePerAlgo.begin();it!=_percentagePerAlgo.end();it++){
-        cout << "algo 1 = " << (*it).second << endl;
+        cout << (*it).first->getName() << " = " << (*it).second << endl;
     }
     cout << "-----------------------------------------------------------" << endl;
 }
