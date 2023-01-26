@@ -8,9 +8,9 @@
 
 
 static void help(void);
-static void readData(char *argv[],int argc);
-static void guess(char *argv[],int argc);
-static void compare(char *argv[], int argc);
+static void readData(char *argv[],int argc, int c);
+static void guess(char *argv[],int argc, int c);
+static void compare(char *argv[], int argc, int c);
 
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
@@ -51,15 +51,15 @@ int main(int argc, char *argv[]){
             break;
 
         case 'r':
-            readData(argv, argc);
+            readData(argv, argc, c);
             break;
 
         case 'g':
-            guess(argv, argc);
+            guess(argv, argc, c);
             break;
 
         case 'c':
-            compare(argv, argc);
+            compare(argv, argc, c);
             break;
     }
     return 0;
@@ -78,12 +78,44 @@ static void help(void){
 //TODO: ajouter commentaires
 //TODO: gérer l'ordre des arguments pour que ça soit peut être + logique
 //TODO: surement possible de le faire avec un switch et en mettant un préfixe à chaque argument genre 'FILE', "exemple.txt", "TRAINING", true... etc
-static void readData(char *argv[], int argc){
-    printAllArguments(argc, argv);
-    cout << "argc = " << argc << endl;
-    cout << "read Data started, pathfile in entry : " << argv[2] << endl;
-    cout << "pathfile in exit : " << argv[5] << endl;
-    bool training = 4;
+static void readData(char *argv[], int argc, int c){
+    cout << endl;
+
+    //printAllArguments(argc, argv);
+
+    bool training = true;
+    string position = "START";
+    int percentage = 100;
+    string pathFile2Read, pathFile2Write;
+
+    if((enoughArguments(argc,c))&&(notTooMuchArguments(argc,c))){
+        pathFile2Read = argv[2];
+        pathFile2Write = argv[3];
+        //cas possibles
+        // 5 : training pas par défault
+        // 6 : pourcentage pas par défault
+        // 7 : position pas par défault
+        if(argc>=5){
+            string strTraining = argv[4];
+            upper(strTraining);
+            if(strTraining=="TRUE"){
+                training = true;
+            }else{
+                training = false;
+            }
+        }
+        if(argc>=6){
+            percentage = stoi(argv[5]);
+        }
+        if(argc>=7){
+            position = argv[6];
+            upper(position);
+        }
+    }
+    Data test;
+    test.useFile(pathFile2Read,pathFile2Write,training,position,percentage);
+    test.print();
+    /*
     if(argc>3){
         cout << "training ? " << argv[3] << endl;
         string train = argv[3];
@@ -97,7 +129,7 @@ static void readData(char *argv[], int argc){
     if(argc>4) {
         cout << "percentage of the file : " << argv[4] << endl;
     }
-    string position = argv[6];
+    //string position = argv[6];
     upper(position);
     cout << "bool training is = " << training << endl;
     Data test;
@@ -106,11 +138,11 @@ static void readData(char *argv[], int argc){
     test.useFile(argv[2], argv[5], training, position, stoi(argv[4]));
     test.print();
     int nbOf2 = test.howMuch(2);
-    cout << "There are " << nbOf2 << " data to describe the 2" << endl;
+    cout << "There are " << nbOf2 << " data to describe the 2" << endl;*/
 
 }
 
-static void guess(char *argv[], int argc){
+static void guess(char *argv[], int argc, int c){
     printAllArguments(argc, argv);
     cout << "guess started, files in entry :" << endl;
     cout << "\tfor training : " << argv[2] << endl;
@@ -130,10 +162,9 @@ static void guess(char *argv[], int argc){
     algo->traiter(dataTrain,dataTest);
     cout << "sortie de la fonction" << endl;
     algo->print();
-
 }
 
-static void compare(char *argv[], int argc){
+static void compare(char *argv[], int argc, int c){
     Data dataTrain;
     dataTrain.readExistingFile(argv[2]);
     dataTrain.print();

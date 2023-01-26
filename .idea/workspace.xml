@@ -77,11 +77,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="los" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="INSA_2022_classification_algorithm" TARGET_NAME="INSA_2022_classification_algorithm" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/executable/main.exe">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -116,7 +111,8 @@
       <workItem from="1674647089640" duration="3096000" />
       <workItem from="1674650861021" duration="3878000" />
       <workItem from="1674669805486" duration="5359000" />
-      <workItem from="1674733630893" duration="1000" />
+      <workItem from="1674733630893" duration="325000" />
+      <workItem from="1674733966374" duration="2872000" />
     </task>
     <servers />
   </component>

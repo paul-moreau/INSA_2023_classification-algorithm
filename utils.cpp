@@ -43,7 +43,7 @@ bool enoughArguments(int argc, int choice){
             }
             break;
         case 'r':
-            if(argc>2){
+            if(argc>=4){
                 res = true;
             }
             break;
@@ -66,7 +66,7 @@ bool enoughArguments(int argc, int choice){
 //A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
 //Pas testée
 //Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
-bool TooMuchArguments(int argc, int choice){
+bool notTooMuchArguments(int argc, int choice){
     bool res = true;
     switch(choice){
         case 'h':
@@ -75,7 +75,7 @@ bool TooMuchArguments(int argc, int choice){
             }
             break;
         case 'r':
-            if(argc<6){
+            if(argc>7){
                 res = false;
             }
             break;
