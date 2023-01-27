@@ -15,18 +15,15 @@ class Data{
         
     public:
         Data();
-        Data(int nbData, int nbSampleMax, bool training);
-        //~Data();
 
         void print() const;
 
         //getters de la classe
         int getNbData() const {return _nbData;}
         int getNbSampleMax() const {return _nbSampleMax;}
-        bool isTraining() const {return _training;}
         multimap<int,vector<float>> getData() const& {return _data;}
         
-        int useFile(string pathFileReaded, string pathFileWrote, bool training, string position, int rate=100);
+        int useFile(string pathFileReaded, string pathFileWrote, string position, int rate=100);
         int writeFile(string pathFile);
         vector<string> readFile(string pathFile) const;
         void readData(vector<string> lines);
