@@ -1,13 +1,15 @@
-
 #include <iostream>
 #include <getopt.h>
 #include "data.hpp"
 #include "algorithm1.hpp"
+#include "algorithm2.hpp"
+#include "compareAlgo.hpp"
 
 
 static void help(void);
-static void readData(char *argv[],int argc);
-static void guess(char *argv[],int argc);
+static void readData(char *argv[],int argc, int c);
+static void guess(char *argv[],int argc, int c);
+static void compare(char *argv[], int argc, int c);
 
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
@@ -15,6 +17,25 @@ static struct option opts[] = {
 	{ "guess", 1, 0, 'g' },
 	{ "compare", 1, 0, 'c' },
 };
+/*int main(){
+    Data dataTrain;
+    dataTrain.readExistingFile("../data/train.txt");
+    dataTrain.print();
+
+    Data dataTest;
+    dataTest.readExistingFile("../data/test.txt");
+    dataTest.print();
+
+    Algorithm1* algo = new Algorithm1();
+    algo->print();
+    algo->traiter(dataTrain,dataTest);
+    //algo->print();
+    CompareAlgo* comparatif = new CompareAlgo(dataTest,dataTrain);
+    vector<Algorithm*> algos2Test;
+    algos2Test.push_back(algo);
+    comparatif->whichAlgo(algos2Test);
+    comparatif->testerAlgo();
+}*/
 
 int main(int argc, char *argv[]){
     int c, option_index = 0;
@@ -29,87 +50,192 @@ int main(int argc, char *argv[]){
             break;
 
         case 'r':
-            readData(argv, argc);
+            readData(argv, argc, c);
             break;
 
         case 'g':
-            guess(argv, argc);
+            guess(argv, argc, c);
             break;
 
         case 'c':
-            cout << "you hit compare" << endl;
+            compare(argv, argc, c);
             break;
     }
     return 0;
 
 }
 
-static void help(void)
-{
+static void help(void){
 	printf( "UsageTest: main.exe [options] ...\n"
 		"  -h --help\t\t\tPrint this help message\n"
 		"  -r --readData\t\t\tStore data from <file> in memory\n"
-		"  -g --guess\t\t\tUse <algorithm> for <file> for <k> elements\n"
+		"  -g --guess\t\t\tUse <algorithm> for <files> for <k> elements\n"
 		"  -c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n");
 }
 
 //TODO: rendre tout ça plus propre de manière générale
 //TODO: ajouter commentaires
-//TODO: gérer l'ordre des arguments pour que ça soit peut être + logique
 //TODO: surement possible de le faire avec un switch et en mettant un préfixe à chaque argument genre 'FILE', "exemple.txt", "TRAINING", true... etc
-static void readData(char *argv[], int argc){
-    printAllArguments(argc, argv);
-    cout << "-----------MAIN  STARTED-----------" << endl;
-    cout << "argc = " << argc << endl;
-    cout << "read Data started, pathfile in entry : " << argv[2] << endl;
-    cout << "pathfile in exit : " << argv[5] << endl;
-    bool training = 4;
-    if(argc>3){
-        cout << "training ? " << argv[3] << endl;
-        string train = argv[3];
-        upper(train);
-        if(train=="TRUE"){
-            training = true;
-        }else{
-            training = false;
+static void readData(char *argv[], int argc, int c){
+    cout << endl;
+
+    if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
+        bool training = true;
+        string position = "START";
+        int percentage = 100;
+        string pathFile2Read = argv[2];
+        string pathFile2Write = argv[3];
+        //cas possibles
+        // 5 : training pas par défault
+        // 6 : pourcentage pas par défault
+        // 7 : position pas par défault
+        if(argc>=5){
+            string strTraining = argv[4];
+            upper(strTraining);
+            if(strTraining=="TRUE"){
+                training = true;
+            }else{
+                training = false;
+            }
         }
+        if(argc>=6){
+            percentage = stoi(argv[5]);
+        }
+        if(argc>=7){
+            position = argv[6];
+            upper(position);
+        }
+        Data test;
+        test.useFile(pathFile2Read,pathFile2Write,training,position,percentage);
+        test.print();
+    }else{
+        cout << "not enough arguments or too much arguments " << endl;
+        printAllArguments(argc,argv);
     }
-    if(argc>4) {
-        cout << "percentage of the file : " << argv[4] << endl;
-    }
-    string position = argv[6];
-    upper(position);
-    cout << "bool training is = " << training << endl;
-    Data test;
-    cout << "------------MAIN  ENDED------------" << endl;
-    test.print();
-    test.useFile(argv[2], argv[5], training, position, stoi(argv[4]));
-    test.print();
-    int nbOf2 = test.howMuch(2);
-    cout << "There are " << nbOf2 << " data to describe the 2" << endl;
 
-
-    
 }
 
-static void guess(char *argv[], int argc){
-    printAllArguments(argc, argv);
-    cout << "guess started, files in entry :" << endl;
-    cout << "\tfor training : " << argv[2] << endl;
-    cout << "\tfor testing : " << argv[3] << endl;
+static void guess(char *argv[], int argc, int c){
+    cout << endl;
 
-    Data dataTrain;
-    dataTrain.readExistingFile(argv[2]);
-    dataTrain.print();
+    if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
+        string pathData4Training = argv[2];
+        string pathData4Testing = argv[3];
 
-    Data dataTest;
-    dataTrain.readExistingFile(argv[3]);
-    dataTrain.print();
-    cout << "coucou" << endl;
-    Algorithm1 algo;
-    vector<int> result = algo.traiter(dataTrain,dataTest);
-    cout << "coucou" << endl;
-    for(int i : result){
-        cout << i << endl;
+        Data data4Training;
+        data4Training.readExistingFile(pathData4Training);
+        data4Training.print();
+
+        Data data4Testing;
+        data4Testing.readExistingFile(pathData4Testing);
+        data4Testing.print();
+
+        int choice = 02;
+        int nbSample = min(data4Training.getNbSampleMax(),data4Testing.getNbSampleMax());
+        Algorithm* algo;
+        if(argc>=5){
+            string strChoice = argv[4];
+            choice = stoi(strChoice);
+        }
+        if(argc>=6){
+            string strNbSample = argv[5];
+            if(stoi(strNbSample)>nbSample){
+                cout << "Le nombre de sample choisi n'est pas pris en compte car il est trop grand : " << endl;
+                cout << "il doit etre < " << nbSample << endl;
+                cout << endl;
+            }else if(stoi(strNbSample)<0){
+                cout << "Le nombre de sample choisi n'est pas pris en compte car il est négatif" << endl;
+                cout << endl;
+            }else{
+                nbSample = stoi(strNbSample);
+            }
+        }
+        switch(choice){
+            case 01:
+                algo = new Algorithm1(nbSample);
+                break;
+            case 02:
+                algo = new Algorithm2(nbSample);
+                break;
+            default:
+                cout << "Choix d'algorithme inconnu : " << choice << endl;
+                cout << choice << " n'est pas un choix possible, " << 02 << " sera le choix retenu." << endl;
+                algo = new Algorithm2(nbSample);
+                break;
+        }
+        algo->traiter(data4Training,data4Testing);
+        algo->print();
+    }else{
+        cout << "not enough arguments or too much arguments " << endl;
+        printAllArguments(argc,argv);
     }
+}
+
+static void compare(char *argv[], int argc, int c){
+    cout << endl;
+
+    if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
+        string pathData4Training = argv[2];
+        string pathData4Testing = argv[3];
+
+        Data data4Training;
+        data4Training.readExistingFile(pathData4Training);
+        data4Training.print();
+
+        Data data4Testing;
+        data4Testing.readExistingFile(pathData4Testing);
+        data4Testing.print();
+
+        int nbSample = min(data4Training.getNbSampleMax(),data4Testing.getNbSampleMax());
+
+        int nbAlgo2Test = stoi(argv[4]);
+        
+        if(argc > 5+nbAlgo2Test){
+            string strNbSample = argv[4+nbAlgo2Test];
+            if(stoi(strNbSample)>nbSample){
+                cout << "Le nombre de sample choisi n'est pas pris en compte car il est trop grand : " << endl;
+                cout << "il doit etre < " << nbSample << endl;
+                cout << endl;
+            }else if(stoi(strNbSample)<0){
+                cout << "Le nombre de sample choisi n'est pas pris en compte car il est négatif" << endl;
+                cout << endl;
+            }else{
+                nbSample = stoi(strNbSample);
+            }
+        }
+
+        vector<Algorithm*> algo2Test;
+        for(int i=5;i<5+nbAlgo2Test;i++){
+            Algorithm* algo;
+            int choice = stoi(argv[i]);
+            switch(choice){
+                case 01:
+                    algo = new Algorithm1(nbSample);
+                    break;
+                case 02:
+                    algo = new Algorithm2(nbSample);
+                    break;
+                default:
+                    cout << "Choix d'algorithme inconnu : " << choice << endl;
+                    cout << choice << " n'est pas un choix possible, " << 02 << " sera le choix retenu." << endl;
+                    algo = new Algorithm2(nbSample);
+                    break;
+            }
+            algo2Test.push_back(algo);
+        }
+
+        CompareAlgo* comparatif = new CompareAlgo(data4Testing,data4Training);
+
+        comparatif->whichAlgo(algo2Test);
+
+        comparatif->testerAlgo();
+
+        comparatif->print();
+    }else{
+        cout << "not enough arguments or too much arguments " << endl;
+        printAllArguments(argc,argv);
+    }
+
+
+
 }

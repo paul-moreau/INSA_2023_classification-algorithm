@@ -49,6 +49,20 @@ cmake_ninja_workdir = C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-a
 
 build cmake_object_order_depends_target_INSA_2022_classification_algorithm: phony || CMakeFiles/INSA_2022_classification_algorithm.dir
 
+build CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm.cpp.obj: CXX_COMPILER__INSA_2022_classification_algorithm_Debug C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/algorithm.cpp || cmake_object_order_depends_target_INSA_2022_classification_algorithm
+  DEP_FILE = CMakeFiles\INSA_2022_classification_algorithm.dir\algorithm.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/.
+  OBJECT_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
+
+build CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm1.cpp.obj: CXX_COMPILER__INSA_2022_classification_algorithm_Debug C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/algorithm1.cpp || cmake_object_order_depends_target_INSA_2022_classification_algorithm
+  DEP_FILE = CMakeFiles\INSA_2022_classification_algorithm.dir\algorithm1.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/.
+  OBJECT_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
+
 build CMakeFiles/INSA_2022_classification_algorithm.dir/data.cpp.obj: CXX_COMPILER__INSA_2022_classification_algorithm_Debug C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/data.cpp || cmake_object_order_depends_target_INSA_2022_classification_algorithm
   DEP_FILE = CMakeFiles\INSA_2022_classification_algorithm.dir\data.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++14
@@ -70,8 +84,15 @@ build CMakeFiles/INSA_2022_classification_algorithm.dir/utils.cpp.obj: CXX_COMPI
   OBJECT_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
   OBJECT_FILE_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
 
-build CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm1.cpp.obj: CXX_COMPILER__INSA_2022_classification_algorithm_Debug C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/algorithm1.cpp || cmake_object_order_depends_target_INSA_2022_classification_algorithm
-  DEP_FILE = CMakeFiles\INSA_2022_classification_algorithm.dir\algorithm1.cpp.obj.d
+build CMakeFiles/INSA_2022_classification_algorithm.dir/compareAlgo.cpp.obj: CXX_COMPILER__INSA_2022_classification_algorithm_Debug C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/compareAlgo.cpp || cmake_object_order_depends_target_INSA_2022_classification_algorithm
+  DEP_FILE = CMakeFiles\INSA_2022_classification_algorithm.dir\compareAlgo.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IC:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/.
+  OBJECT_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
+
+build CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm2.cpp.obj: CXX_COMPILER__INSA_2022_classification_algorithm_Debug C$:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/algorithm2.cpp || cmake_object_order_depends_target_INSA_2022_classification_algorithm
+  DEP_FILE = CMakeFiles\INSA_2022_classification_algorithm.dir\algorithm2.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++14
   INCLUDES = -IC:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/.
   OBJECT_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir
@@ -85,7 +106,7 @@ build CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm1.cpp.obj: CXX_
 #############################################
 # Link the executable INSA_2022_classification_algorithm.exe
 
-build INSA_2022_classification_algorithm.exe: CXX_EXECUTABLE_LINKER__INSA_2022_classification_algorithm_Debug CMakeFiles/INSA_2022_classification_algorithm.dir/data.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/main.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/utils.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm1.cpp.obj
+build INSA_2022_classification_algorithm.exe: CXX_EXECUTABLE_LINKER__INSA_2022_classification_algorithm_Debug CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm1.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/data.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/main.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/utils.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/compareAlgo.cpp.obj CMakeFiles/INSA_2022_classification_algorithm.dir/algorithm2.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\INSA_2022_classification_algorithm.dir

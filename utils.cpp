@@ -24,7 +24,8 @@ void upper(string& s){
 
 void printAllArguments(int argc, char* argv[]){
     cout << "--------PRINT ALL ARGUMENTS--------" << endl;
-    for(int i=0;i<argc;i++){
+    cout << "nombre d'arguments = " << argc - 2 << endl;
+    for(int i=2;i<argc;i++){
         cout << argv[i] << endl;
     }
     cout << "-----PRINT ALL ARGUMENTS ENDED-----" << endl;
@@ -33,7 +34,7 @@ void printAllArguments(int argc, char* argv[]){
 //A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
 //Pas testée
 //Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
-bool enoughArguments(int argc, int choice){
+bool enoughArguments(int argc, char* argv[], int choice){
     bool res = false;
     switch(choice){
         case 'h':
@@ -42,21 +43,25 @@ bool enoughArguments(int argc, int choice){
             }
             break;
         case 'r':
-            if(argc>2){
+            if(argc>=4){
                 res = true;
             }
             break;
 
         case 'g':
-            if(argc>1){
+            if(argc>=4){
                 res = true;
             }
             break;
 
         case 'c':
-            if(argc>1){
-                res = true;
+            if(argc>=5){
+                int nbAlgo2Test = stoi(argv[4]);
+                if(argc>4+nbAlgo2Test){
+                    res = true;
+                }
             }
+
             break;
     }
     return res;
@@ -65,29 +70,32 @@ bool enoughArguments(int argc, int choice){
 //A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
 //Pas testée
 //Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
-bool TooMuchArguments(int argc, int choice){
+bool notTooMuchArguments(int argc, char* argv[], int choice){
     bool res = true;
     switch(choice){
         case 'h':
-            if(argc<2){
+            if(argc>2){
                 res = false;
             }
             break;
         case 'r':
-            if(argc<6){
+            if(argc>7){
                 res = false;
             }
             break;
 
         case 'g':
-            if(argc<667){
+            if(argc>6){
                 res = false;
             }
             break;
 
         case 'c':
-            if(argc<667){
-                res = false;
+            if(argc>=5){
+                int nbAlgo2Test = stoi(argv[4]);
+                if(argc>6+nbAlgo2Test){
+                    res = false;
+                }
             }
             break;
     }

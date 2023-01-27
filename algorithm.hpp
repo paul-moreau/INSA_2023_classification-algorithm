@@ -2,12 +2,29 @@
 #define ALGORITHM_HPP
 
 #include <iostream>
+#include <algorithm>
 #include "data.hpp"
 
 using namespace std;
 
 class Algorithm{
+    protected:
+        int _nbSample2Use;
+        vector<int> _predictedResult;
+        string _name;
+        int _id;
+        float _percentage;
     public:
-        virtual vector<int> traiter(Data dataRef, Data dataUnderTest) = 0;
+        void traiter(Data data4Training, Data data4Testing);
+        void computePercentage(multimap<int,vector<float>> testing);
+
+        virtual float applyMethod(vector<float> vecTesting, vector<float> vecTraining) = 0;
+        virtual void add2PredictedResult(multimap<int, vector<float>> training,vector<float> firstResult) = 0;
+
+        vector<int> getPredictedResult() const& {return _predictedResult;};
+        string getName() const {return _name;};
+        float getPercentage() const {return _percentage;};
+
+        void const print();
 };
 #endif
