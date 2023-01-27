@@ -34,7 +34,7 @@ void printAllArguments(int argc, char* argv[]){
 //A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
 //Pas testée
 //Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
-bool enoughArguments(int argc, int choice){
+bool enoughArguments(int argc, char* argv[], int choice){
     bool res = false;
     switch(choice){
         case 'h':
@@ -55,9 +55,13 @@ bool enoughArguments(int argc, int choice){
             break;
 
         case 'c':
-            if(argc>1){
-                res = true;
+            if(argc>=5){
+                int nbAlgo2Test = stoi(argv[4]);
+                if(argc>4+nbAlgo2Test){
+                    res = true;
+                }
             }
+
             break;
     }
     return res;
@@ -66,7 +70,7 @@ bool enoughArguments(int argc, int choice){
 //A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
 //Pas testée
 //Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
-bool notTooMuchArguments(int argc, int choice){
+bool notTooMuchArguments(int argc, char* argv[], int choice){
     bool res = true;
     switch(choice){
         case 'h':
@@ -87,8 +91,11 @@ bool notTooMuchArguments(int argc, int choice){
             break;
 
         case 'c':
-            if(argc<667){
-                res = false;
+            if(argc>=5){
+                int nbAlgo2Test = stoi(argv[4]);
+                if(argc>6+nbAlgo2Test){
+                    res = false;
+                }
             }
             break;
     }
