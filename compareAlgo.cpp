@@ -28,12 +28,11 @@ void CompareAlgo::whichAlgo(vector<Algorithm*> algos2Test){
     _algos = algos2Test;
     cout << algos2Test.size() << " algorithme(s) a tester ajoute(s)" << endl;
     cout << "-----------------------------------" << endl;
+    cout << endl;
 }
 void CompareAlgo::testerAlgo() {
     vector<Algorithm*>::iterator it;
     for(it=_algos.begin();it!=_algos.end();it++){
-        (*it)->print();
         (*it)->traiter(_data4Training,_data4Testing);
-        (*it)->print();
     }
 }
