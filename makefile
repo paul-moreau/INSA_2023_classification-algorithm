@@ -1,3 +1,5 @@
+## Makefile for windows 
+
 NAME	= classifier
 
 CFLAGS	= -std=c++14 -Wall -Wextra -Werror
@@ -12,7 +14,7 @@ SRC		= main.cpp\
 
 OBJ		= $(SRC:.cpp=.o)
 
-RM		= rm -rf
+RM		= del -r -f
 
 $(NAME): $(OBJ)
 	g++ -o $(NAME) $(OBJ) $(CFLAGS)
@@ -23,4 +25,4 @@ clean:
 	$(RM) $(OBJ)
 
 fclean:		clean
-	$(RM) $(NAME)
+	$(RM) $(NAME).exe
