@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="INSA_2022_classification_algorithm" targetName="INSA_2022_classification_algorithm" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e466e175-a4f3-46ce-be4f-023b3b8dc4c2" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="clangTidyViaClangd" value="false" />
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2022" />
+    <option name="minorVersion" value="3" />
+  </component>
+  <component name="ProjectId" id="2Ia73WIr1e6EnZhmadLmsPSqBQE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Paul/Documents/GitHub/INSA_2022_classification-algorithm/executable&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Paul\Documents\GitHub\INSA_2022_classification-algorithm\executable" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Paul\Documents\GitHub\INSA_2022_classification-algorithm\executable" />
+    </key>
+  </component>
+  <component name="RunManager" selected="CMake Application.INSA_2022_classification_algorithm">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="INSA_2022_classification_algorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="INSA_2022_classification_algorithm" TARGET_NAME="INSA_2022_classification_algorithm" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="INSA_2022_classification_algorithm" RUN_TARGET_NAME="INSA_2022_classification_algorithm">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="los" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="INSA_2022_classification_algorithm" TARGET_NAME="INSA_2022_classification_algorithm" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/executable/main.exe">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.INSA_2022_classification_algorithm" />
+      <item itemvalue="CMake Application.los" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e466e175-a4f3-46ce-be4f-023b3b8dc4c2" name="Changes" comment="" />
+      <created>1670407642398</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670407642398</updated>
+      <workItem from="1670407643736" duration="3975000" />
+      <workItem from="1670414387593" duration="1417000" />
+      <workItem from="1670519713107" duration="4926000" />
+      <workItem from="1670542703797" duration="6553000" />
+      <workItem from="1670777758089" duration="7578000" />
+      <workItem from="1670836642352" duration="1590000" />
+      <workItem from="1674465950084" duration="2883000" />
+      <workItem from="1674471944953" duration="1734000" />
+      <workItem from="1674505057883" duration="1833000" />
+      <workItem from="1674562704408" duration="5711000" />
+      <workItem from="1674587326179" duration="38000" />
+      <workItem from="1674587641985" duration="1504000" />
+      <workItem from="1674637942930" duration="2756000" />
+      <workItem from="1674647089640" duration="3096000" />
+      <workItem from="1674650861021" duration="3878000" />
+      <workItem from="1674669805486" duration="5359000" />
+      <workItem from="1674733630893" duration="325000" />
+      <workItem from="1674733966374" duration="2872000" />
+      <workItem from="1674737610967" duration="1735000" />
+      <workItem from="1674739701256" duration="4075000" />
+      <workItem from="1674758605482" duration="5507000" />
+      <workItem from="1674769427369" duration="5508000" />
+      <workItem from="1674811735300" duration="2090000" />
+      <workItem from="1674814820185" duration="1193000" />
+      <workItem from="1674816301140" duration="1392000" />
+      <workItem from="1675027509886" duration="125000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
