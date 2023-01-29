@@ -61,8 +61,11 @@ bool enoughArguments(int argc, char* argv[], int choice){
                     res = true;
                 }
             }
-
             break;
+        case 'a':
+            if(argc>1){
+                res = true;
+            }
     }
     return res;
 }
@@ -96,6 +99,11 @@ bool notTooMuchArguments(int argc, char* argv[], int choice){
                 if(argc>6+nbAlgo2Test){
                     res = false;
                 }
+            }
+            break;
+        case 'a':
+            if(argc>2){
+                res = false;
             }
             break;
     }

@@ -10,12 +10,16 @@ static void help(char *argv[],int argc, int c);
 static void readData(char *argv[],int argc, int c);
 static void guess(char *argv[],int argc, int c);
 static void compare(char *argv[], int argc, int c);
+static void algorithms(char *argv[], int argc, int c);
+
+const int NUMBER_OF_AVAILABLE_ALGORITHMS = 2;
 
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
 	{ "readData", 1, 0, 'r' },
 	{ "guess", 1, 0, 'g' },
 	{ "compare", 1, 0, 'c' },
+    { "algorithms", 0, 0, 'a' }
 };
 /*int main(){
     Data dataTrain;
@@ -60,7 +64,8 @@ int main(int argc, char *argv[]){
             compare(argv, argc, c);
             break;
         case 'a':
-            cout << "you hit a" << endl;
+            algorithms(argv, argc, c);
+            break;
     }
     return 0;
 
@@ -115,23 +120,26 @@ static void help(char *argv[],int argc, int c){
                         "\t\tk : optional, int, default value maximal number of samples per data\n"
                         "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
             }else if((choice=="A")||(choice=="ALGORITHMS")) {
-                printf("-c --compare : Compare functionning of <algorithm1> with <algorithm2> with <files> for <k> elements\n"
-                       "Example : -c pathFileForTraining  numberOfAlgorithmToCompare AlgorithmId1 ... AlgorithmIdX k\n"
-                       "\t\tpathFileForTraining : mandatory, string\n"
-                       "\t\t\tPath of the file with data to train the classifier\n"
-                       "\t\tpathFileForTesting : mandatory, string\n"
-                       "\t\t\tPath of the file with data to test\n"
-                       "\t\tnumberOfAlgorithmToCompare : mandatory, int\n"
-                       "\t\t\tNumber of Algorithm which will be tested\n"
-                       "\t\tAlgorithmIdX : mandatory, int, \n"
-                       "\t\t\tId of the algorithm, must be in the list of algorithm (see also -h a)\n"
-                       "\t\t\tIt is necessary to have same number of Id as in numberOfAlgorithmToCompare \n"
-                       "\t\tk : optional, int, default value maximal number of samples per data\n"
-                       "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
+                printf("stfu noob it is easy");
             }else{
                 printf("Unknown command");
             }
         }
+    }else{
+        cout << "not enough arguments or too much arguments " << endl;
+        printAllArguments(argc,argv);
+    }
+}
+
+static void algorithms(char *argv[],int argc, int c){
+    if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
+        Algorithm1 algo1;
+        cout << "Name : " << algo1.getName() << ", ID = " << algo1.getId() << endl;
+        Algorithm2 algo2;
+        cout << "Name : " << algo2.getName() << ", ID = " << algo2.getId() << endl;
+    }else{
+        cout << "not enough arguments or too much arguments " << endl;
+        printAllArguments(argc,argv);
     }
 }
 
