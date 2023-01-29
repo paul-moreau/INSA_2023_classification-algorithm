@@ -6,7 +6,7 @@
 #include "compareAlgo.hpp"
 
 
-static void help(void);
+static void help(char *argv[],int argc, int c);
 static void readData(char *argv[],int argc, int c);
 static void guess(char *argv[],int argc, int c);
 static void compare(char *argv[], int argc, int c);
@@ -40,13 +40,12 @@ static struct option opts[] = {
 int main(int argc, char *argv[]){
     int c, option_index = 0;
     int p=0;
-    c = getopt_long(argc, argv, "hr:g:c :", opts,
+    c = getopt_long(argc, argv, "hr:g:c :a", opts,
             &option_index);
 
-    switch (c)
-    {
+    switch (c){
         case 'h':
-            help();
+            help(argv, argc, c);
             break;
 
         case 'r':
@@ -60,17 +59,80 @@ int main(int argc, char *argv[]){
         case 'c':
             compare(argv, argc, c);
             break;
+        case 'a':
+            cout << "you hit a" << endl;
     }
     return 0;
 
 }
 
-static void help(void){
-	printf( "UsageTest: main.exe [options] ...\n"
-		"  -h --help\t\t\tPrint this help message\n"
-		"  -r --readData\t\t\tStore data from <file> in memory\n"
-		"  -g --guess\t\t\tUse <algorithm> for <files> for <k> elements\n"
-		"  -c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n");
+static void help(char *argv[],int argc, int c){
+    if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
+        if(argc==2){
+            printf( "UsageTest: classifier.exe [options] ...\n"
+                    "\t-h --help\t\t\tPrint this help message\n"
+                    "\t-r --readData\t\t\tStore data from <file> in memory\n"
+                    "\t-g --guess\t\t\tUse <algorithm> for <files> for <k> elements\n"
+                    "\t-c --compare\t\t\tCompare functionning of <algorithm1> with <algorithm2> with <file> for <k> elements\n"
+                    "\t-a --algorithms\t\t\tPrint available algorithms\n");
+        }else{
+            string choice = argv[2];
+            upper(choice);
+            if((choice=="R")||(choice=="READDATA")){
+                printf("-r --readData : Store data from <file> in memory\n"
+                        "Example : -r pathFileIn pathFileOut percentage position\n"
+                        "\t\tpathFileIn : mandatory, string\n"
+                        "\t\t\tPath of the file with data for reading\n"
+                        "\t\tpathFileOut : mandatory, string\n"
+                        "\t\t\tPath of the file in which data will be write\n"
+                        "\t\tpercentage : optional, int, default value 100\n"
+                        "\t\t\tPercentage read from the file\n"
+                        "\t\tposition : optional, string, start or end, default value start\n"
+                        "\t\t\tRead the beginning or the end of the file \n");
+            }else if((choice=="G")||(choice=="GUESS")){
+                printf( "-g --guess : Use <algorithm> for <files> for <k> elements\n"
+                        "Example : -g pathFileForTraining pathFileForTesting AlgorithmId k\n"
+                        "\t\tpathFileForTraining : mandatory, string\n"
+                        "\t\t\tPath of the file with data to train the classifier\n"
+                        "\t\tpathFileForTesting : mandatory, string\n"
+                        "\t\t\tPath of the file with data to test\n"
+                        "\t\tAlgorithmId : mandatory, int\n"
+                        "\t\t\tId of the algorithm, must be in the list of algorithm (see also -h a)\n"
+                        "\t\tk : optional, int, default value maximal number of samples per data\n"
+                        "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
+            }else if((choice=="C")||(choice=="COMPARE")){
+                printf( "-c --compare : Compare functionning of <algorithm1> with <algorithm2> with <files> for <k> elements\n"
+                        "Example : -c pathFileForTraining  numberOfAlgorithmToCompare AlgorithmId1 ... AlgorithmIdX k\n"
+                        "\t\tpathFileForTraining : mandatory, string\n"
+                        "\t\t\tPath of the file with data to train the classifier\n"
+                        "\t\tpathFileForTesting : mandatory, string\n"
+                        "\t\t\tPath of the file with data to test\n"
+                        "\t\tnumberOfAlgorithmToCompare : mandatory, int\n"
+                        "\t\t\tNumber of Algorithm which will be tested\n"
+                        "\t\tAlgorithmIdX : mandatory, int, \n"
+                        "\t\t\tId of the algorithm, must be in the list of algorithm (see also -h a)\n"
+                        "\t\t\tIt is necessary to have same number of Id as in numberOfAlgorithmToCompare \n"
+                        "\t\tk : optional, int, default value maximal number of samples per data\n"
+                        "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
+            }else if((choice=="A")||(choice=="ALGORITHMS")) {
+                printf("-c --compare : Compare functionning of <algorithm1> with <algorithm2> with <files> for <k> elements\n"
+                       "Example : -c pathFileForTraining  numberOfAlgorithmToCompare AlgorithmId1 ... AlgorithmIdX k\n"
+                       "\t\tpathFileForTraining : mandatory, string\n"
+                       "\t\t\tPath of the file with data to train the classifier\n"
+                       "\t\tpathFileForTesting : mandatory, string\n"
+                       "\t\t\tPath of the file with data to test\n"
+                       "\t\tnumberOfAlgorithmToCompare : mandatory, int\n"
+                       "\t\t\tNumber of Algorithm which will be tested\n"
+                       "\t\tAlgorithmIdX : mandatory, int, \n"
+                       "\t\t\tId of the algorithm, must be in the list of algorithm (see also -h a)\n"
+                       "\t\t\tIt is necessary to have same number of Id as in numberOfAlgorithmToCompare \n"
+                       "\t\tk : optional, int, default value maximal number of samples per data\n"
+                       "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
+            }else{
+                printf("Unknown command");
+            }
+        }
+    }
 }
 
 //TODO: rendre tout ça plus propre de manière générale

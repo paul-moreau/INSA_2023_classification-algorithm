@@ -74,7 +74,7 @@ bool notTooMuchArguments(int argc, char* argv[], int choice){
     bool res = true;
     switch(choice){
         case 'h':
-            if(argc>2){
+            if(argc>4){
                 res = false;
             }
             break;
