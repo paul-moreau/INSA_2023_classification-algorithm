@@ -24,6 +24,7 @@ class Algorithm{
         vector<int> getPredictedResult() const& {return _predictedResult;};
         string getName() const {return _name;};
         float getPercentage() const {return _percentage;};
+        int getId() const {return _id;};
 
         void const print();
 };
