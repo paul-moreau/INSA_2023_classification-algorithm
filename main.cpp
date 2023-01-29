@@ -150,34 +150,36 @@ static void readData(char *argv[], int argc, int c){
     cout << endl;
 
     if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
-        bool training = true;
         string position = "START";
         int percentage = 100;
         string pathFile2Read = argv[2];
         string pathFile2Write = argv[3];
         //cas possibles
-        // 5 : training pas par défault
         // 6 : pourcentage pas par défault
         // 7 : position pas par défault
         if(argc>=5){
-            string strTraining = argv[4];
-            upper(strTraining);
-            if(strTraining=="TRUE"){
-                training = true;
-            }else{
-                training = false;
+            try{
+                percentage = stoi(argv[4]);
+            }catch(std::invalid_argument & e){
+                cout << "Error with " << e.what() << " : invalid argument, argument must be an integer" << endl;
             }
         }
         if(argc>=6){
-            percentage = stoi(argv[5]);
-        }
-        if(argc>=7){
-            position = argv[6];
+            position = argv[5];
             upper(position);
+            if((position!="START")&&(position!="END")){
+                cout << "Invalid argument, position must be 'start' or 'end'" << endl;
+                cout << "Default position of lecture = 'start' " << endl;
+                position = "START";
+            }
         }
+        cout << endl;
         Data test;
-        test.useFile(pathFile2Read,pathFile2Write,training,position,percentage);
+        test.useFile(pathFile2Read,pathFile2Write,position,percentage);
         test.print();
+        for(int i=0;i<10;i++){
+            cout << "for " << i << ", there are " << test.howMuch(i) << " data" << endl;
+        }
     }else{
         cout << "not enough arguments or too much arguments " << endl;
         printAllArguments(argc,argv);

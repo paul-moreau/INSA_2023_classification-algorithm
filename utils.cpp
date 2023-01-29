@@ -43,7 +43,7 @@ bool enoughArguments(int argc, char* argv[], int choice){
             }
             break;
         case 'r':
-            if(argc>=4){
+            if(argc>3){
                 res = true;
             }
             break;
@@ -82,7 +82,7 @@ bool notTooMuchArguments(int argc, char* argv[], int choice){
             }
             break;
         case 'r':
-            if(argc>7){
+            if(argc>6){
                 res = false;
             }
             break;

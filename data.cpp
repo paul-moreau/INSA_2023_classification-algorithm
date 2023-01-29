@@ -3,58 +3,25 @@
 Data::Data(){
     _nbData = 0;
     _nbSampleMax = 0;
-    _training = true;
 }
-
-//Constructor with all arguments except the multimap 
-Data::Data(int nbData, int nbSampleMax, bool training){
-    _nbData = nbData;
-    _nbSampleMax = nbSampleMax;
-    _training = training;
-}
-
-//Est ce que ça marche ? en tous cas ça compile
-//Spoiler : ça marchait pas
-//for ( LO_Index ::iterator i = _index->begin(); i != _index->end(); i++ ) delete (*i).second; // Delete all ensortinges in the index _index->erase( _index->begin(), _index->end() );
-//Apparemment c'est pas nécessaire
-/*Data::~Data(){
-    delete[] _data;
-    for(multimap< int, vector<float> >::iterator it = _data.begin(); it != _data.end(); ++it){
-        cout << "entrée destructeur" << endl;
-        (*it).second.~vector();
-    }
-    multimap<int,vector<float>>::iterator it;
-    for (it=_data.begin(); it!=_data.end(); ++it){
-        delete &(*it).first;
-        delete[] &(*it).second;
-    }
-}*/
 
 //Print all arguments of class Data except the multimap
 //TODO: surcharge de l'opérateur << ?
 void Data::print() const{
     cout << "------------PRINT  DATA------------" << endl;
-    cout << "Data d'entrainement : " << _training << endl;
     cout << "Nombre de data differentes : ";
     cout << this->_nbData << endl;
     cout << "Nombre de samples maximal par data : ";
     cout << this->_nbSampleMax << endl;
-    /*multimap<int,vector<float>>::iterator it;
-    multimap<int,vector<float>> data = this->getData();
-    for(it = data.begin();it!= data.end(); ++it){
-        cout << "it.first = " << (*it).first;
-        cout << " and it.second.size = " << (*it).second.size() << endl;
-    }*/
     cout << "-----------------------------------" << endl;
     cout << endl;
 }
 
 //lit un fichier et remplit la multimap de la class Data
 //TODO: ajouter du debug/de la gestion d'erreur ? (si le fichier existe pas ? si la "trame" du fichier n'est pas celle attendue ?)
-int Data::useFile(string pathFileReaded, string pathFileWrote, bool training, string position, int rate){
+int Data::useFile(string pathFileReaded, string pathFileWrote, string position, int rate){
 
     vector<string> lines = readFile(pathFileReaded);
-    _training = training;
     _nbData = stoi(lines[0]);
     _nbSampleMax = stoi(lines[1]);
 
@@ -93,6 +60,7 @@ vector<string> Data::readFile(string pathFile) const{
     else{
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
     }
+    cout << "Read file in " << pathFile << " finished" << endl;
     return lines;
 }
 
@@ -165,12 +133,16 @@ int Data::writeFile(string pathFile){
             result << endl;
         }
         result.close();
+        cout << "Write file in " << pathFile << " finished" << endl;
         cout << endl;
         return 1;
     }else{
         cout << "ERREUR: Impossible d'ouvrir le fichier en écriture." << endl;
+        cout << "Write file in " << pathFile << " finished" << endl;
+        cout << endl;
         return 0;
     }
+
 }
 
 int Data::readExistingFile(string pathFile){
@@ -183,13 +155,6 @@ int Data::readExistingFile(string pathFile){
             _nbData = stoi(arguments[1]);
         }else if(arguments[0]=="_SampleMax"){
             _nbSampleMax = stoi(arguments[1]);
-        }else if(arguments[0]=="_training"){
-            int train = stoi(arguments[1]);
-            if(train==1){
-                _training = true;
-            }else{
-                _training = false;
-            }
         }
     }
     for (int i=1;i<_nbData+1;i++){
