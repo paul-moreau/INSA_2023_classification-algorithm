@@ -1,8 +1,7 @@
-
-
 #include "utils.hpp"
 #include <iostream>
-//méthode split utile pour split une string en un vector de string avec un char delimiter comme ' ' par exemple
+
+//split a string with a char used for delimiter
 vector<string> split (const string &s, char delim) {
     vector<string> result;
     stringstream ss (s);
@@ -15,25 +14,24 @@ vector<string> split (const string &s, char delim) {
     return result;
 }
 
-//Testée, je crois que ça fonctionne
+//transform a string in uppercase
 void upper(string& s){
     for(auto &c : s){
             c = toupper(c);
     }
 }
 
+//print all arguments entered by the user
 void printAllArguments(int argc, char* argv[]){
     cout << "--------PRINT ALL ARGUMENTS--------" << endl;
-    cout << "nombre d'arguments = " << argc - 2 << endl;
+    cout << "number of arguments = " << argc - 2 << endl;
     for(int i=2;i<argc;i++){
         cout << argv[i] << endl;
     }
     cout << "-----PRINT ALL ARGUMENTS ENDED-----" << endl;
 }
 
-//A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
-//Pas testée
-//Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
+//Test if there is enough arguments for each commands
 bool enoughArguments(int argc, char* argv[], int choice){
     bool res = false;
     switch(choice){
@@ -70,9 +68,7 @@ bool enoughArguments(int argc, char* argv[], int choice){
     return res;
 }
 
-//A compléter quand on sera plus précis sur ce qu'on veut pour les commandes excatement
-//Pas testée
-//Utile ? Pas sur que ça soit utile dans tous les cas (exemple de --help), mais dans le reste je pense que oui
+//Test if there is not too much arguments for each commands
 bool notTooMuchArguments(int argc, char* argv[], int choice){
     bool res = true;
     switch(choice){

@@ -1,7 +1,3 @@
-//
-// Created by Paul on 25/01/2023.
-//
-
 #ifndef INSA_2022_CLASSIFICATION_ALGORITHM_COMPAREALGO_HPP
 #define INSA_2022_CLASSIFICATION_ALGORITHM_COMPAREALGO_HPP
 
@@ -21,7 +17,7 @@ class CompareAlgo {
 public:
     CompareAlgo(Data data4Testing, Data data4Training);
     void whichAlgo(vector<Algorithm*> algos2Test);
-    void testerAlgo();
+    void testAlgo();
     void print();
 };
 

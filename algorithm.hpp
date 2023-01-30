@@ -15,7 +15,7 @@ class Algorithm{
         int _id;
         float _percentage;
     public:
-        void traiter(Data data4Training, Data data4Testing);
+        void process(Data data4Training, Data data4Testing);
         void computePercentage(multimap<int,vector<float>> testing);
 
         virtual float applyMethod(vector<float> vecTesting, vector<float> vecTraining) = 0;

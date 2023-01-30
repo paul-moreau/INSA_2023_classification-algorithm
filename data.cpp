@@ -1,12 +1,12 @@
 #include "data.hpp"
+
 //default constructor of class Data
 Data::Data(){
     _nbData = 0;
     _nbSampleMax = 0;
 }
 
-//Print all arguments of class Data except the multimap
-//TODO: surcharge de l'opérateur << ?
+//Print all attributes of class Data except the multimap
 void Data::print() const{
     cout << "------------PRINT  DATA------------" << endl;
     cout << "Nombre de data differentes : ";
@@ -17,8 +17,10 @@ void Data::print() const{
     cout << endl;
 }
 
-//lit un fichier et remplit la multimap de la class Data
-//TODO: ajouter du debug/de la gestion d'erreur ? (si le fichier existe pas ? si la "trame" du fichier n'est pas celle attendue ?)
+//read a file with the given structure
+//exploit the file and store it in a multimap
+//apply a rate to the read data
+//write a file with our structure
 int Data::useFile(string pathFileReaded, string pathFileWrote, string position, int rate){
 
     vector<string> lines = readFile(pathFileReaded);
@@ -27,8 +29,8 @@ int Data::useFile(string pathFileReaded, string pathFileWrote, string position, 
 
     readData(lines);
 
-    //Comptage du nombre de clés de la multimap
-    //utile pour debug
+    //Compute the number of key in the multimap
+    //useful to debug
     multimap<int,vector<float>>::iterator it;
     int nombreData = 0;
     for (it=_data.begin(); it!=_data.end(); ++it){
@@ -44,8 +46,7 @@ int Data::useFile(string pathFileReaded, string pathFileWrote, string position, 
     return 1;
 }
 
-//lit un fichier
-//TODO: A mettre dans utils ?
+//read a file
 vector<string> Data::readFile(string pathFile) const{
     cout << "Read file in " << pathFile << " started" << endl;
     ifstream fileRead (pathFile, ios::in);
@@ -64,7 +65,7 @@ vector<string> Data::readFile(string pathFile) const{
     return lines;
 }
 
-//met le résultat de readFile dans _data
+//convert the string read by readFile into a key and a vector<float> in to a multimap
 void Data::readData(vector<string> lines){
     for (int i=2;i<_nbData+2;i++){
         vector<string> oneLineOfData = split(lines[i],' ');
@@ -77,8 +78,8 @@ void Data::readData(vector<string> lines){
     }
 }
 
-//Applique un taux à _data
-//TODO gérer le fait d'une division donnant un résultat non entier, ici pas pris en compte
+//Apply a percentage to the read data, from the start or from the end of the multimap
+//for example : read the first rate% of the file or the last rate% of the file
 void Data::applyRate2Data(int rate, string position){
     int nbDataPerFigure = (_nbData/10) * rate / 100;
     _nbData = _nbData * rate / 100;
@@ -115,7 +116,7 @@ void Data::applyRate2Data(int rate, string position){
     _data = dataWithRate;
 }
 
-//Ecrit _data dans un fichier
+//write _data in a file with our structure
 int Data::writeFile(string pathFile){
 
     ofstream result (pathFile, ios::out);
@@ -145,6 +146,7 @@ int Data::writeFile(string pathFile){
 
 }
 
+//read a file with our structure
 int Data::readExistingFile(string pathFile){
 
     vector<string> lines = readFile(pathFile);
@@ -169,7 +171,7 @@ int Data::readExistingFile(string pathFile){
     return 1;
 }
 
-//Compte le nombre de data différentes pour le même résultat
+//Compute the number of different data for the same result
 int Data::howMuch(int key) const {
     int res = 0;
     if(!_data.empty()){

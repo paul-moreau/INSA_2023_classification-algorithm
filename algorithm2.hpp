@@ -1,7 +1,3 @@
-//
-// Created by Paul on 25/01/2023.
-//
-
 #ifndef INSA_2022_CLASSIFICATION_ALGORITHM_ALGORITHM2_HPP
 #define INSA_2022_CLASSIFICATION_ALGORITHM_ALGORITHM2_HPP
 
@@ -18,13 +14,11 @@ class Algorithm2 : public Algorithm{
         Algorithm2(int nbSample2Use);
         ~Algorithm2();
 
-        float produitScalaire(vector<float> vec1, vector<float> vec2);
-        float norme(vector<float> vec);
+        float scalarProduct(vector<float> vec1, vector<float> vec2);
+        float norm(vector<float> vec);
 
         float applyMethod(vector<float> vecTesting, vector<float> vecTraining);
         void add2PredictedResult(multimap<int, vector<float>> training, vector<float> firstResult);
 
 };
-
-
 #endif //INSA_2022_CLASSIFICATION_ALGORITHM_ALGORITHM2_HPP

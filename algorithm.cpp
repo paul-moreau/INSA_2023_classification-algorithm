@@ -1,9 +1,8 @@
-//
-// Created by Paul on 25/01/2023.
-//
-
 #include "algorithm.hpp"
 
+//print algorithm
+//print name, the number of sample to use
+//the predicted results and the percentage of good results
 void const Algorithm::print(){
     cout << "-------------PRINT ALGO-------------" << endl;
     cout << "Name = " << _name << endl;
@@ -16,7 +15,9 @@ void const Algorithm::print(){
     cout << "Percentage of good results = " << _percentage << endl;
     cout << "-----------------------------------" << endl;
 }
-void Algorithm::traiter(Data data4Training, Data data4Testing){
+
+//process data from two differrent data : one for training and one for testing
+void Algorithm::process(Data data4Training, Data data4Testing){
     multimap<int,vector<float>>::iterator itTraining;
     multimap<int, vector<float>> training;
     training = data4Training.getData();
@@ -24,7 +25,7 @@ void Algorithm::traiter(Data data4Training, Data data4Testing){
     multimap<int,vector<float>>::iterator itTesting;
     multimap<int, vector<float>> testing;
     testing = data4Testing.getData();
-    cout << "nbOfSample2Use = " << _nbSample2Use << endl;
+
     for(itTesting = testing.begin(); itTesting != testing.end(); itTesting++){
         vector<float> firstResult;
         for(itTraining = training.begin(); itTraining != training.end(); itTraining++){
@@ -40,6 +41,7 @@ void Algorithm::traiter(Data data4Training, Data data4Testing){
     computePercentage(testing);
 }
 
+//Compute percentage of good results among predicted results
 void Algorithm::computePercentage(multimap<int,vector<float>> testing) {
     int nbGoodResult = 0;
     int i = 0;

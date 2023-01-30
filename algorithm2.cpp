@@ -1,16 +1,15 @@
-//
-// Created by Paul on 25/01/2023.
-//
-
 #include "algorithm2.hpp"
 #include <math.h>
 
+//Default constructor
 Algorithm2::Algorithm2() {
     _nbSample2Use = 70;
     _name = "Cosine";
     _id = 02;
     _percentage = 0;
 }
+
+//Constructor with a value for _nbSample2Use
 Algorithm2::Algorithm2(int nbSample2Use) {
     _nbSample2Use = nbSample2Use;
     _name = "Cosine";
@@ -18,10 +17,7 @@ Algorithm2::Algorithm2(int nbSample2Use) {
     _percentage = 0;
 }
 
-Algorithm2::~Algorithm2(){
-
-}
-
+//Apply the specific method of the algorithm to the data
 float Algorithm2::applyMethod(vector<float> vecTesting, vector<float> vecTraining){
     vector<float> newVecTesting, newVecTraining;
     //cout << "_nbSample2Use = " << _nbSample2Use << endl;
@@ -36,18 +32,13 @@ float Algorithm2::applyMethod(vector<float> vecTesting, vector<float> vecTrainin
     return prodScal/(normeRef*normeTest);
 }
 
+//Add the result predicted to a vector
 void Algorithm2::add2PredictedResult(multimap<int, vector<float>> training,vector<float> firstResult) {
     multimap<int,vector<float>>::iterator itTraining;
     int indMax = max_element(firstResult.begin(),firstResult.end()) - firstResult.begin();
-    //cout << "indMax = " << indMax << endl;
     int j=0;
-    /*for(float f : firstResult){
-        cout << f << " ";
-    }
-    cout << endl;*/
     for(itTraining=training.begin();itTraining!=training.end();itTraining++) {
         if (j == indMax) {
-            //cout << " " << (*itTraining).first << endl;
             _predictedResult.push_back((*itTraining).first);
             itTraining = training.end();
         }
@@ -55,7 +46,8 @@ void Algorithm2::add2PredictedResult(multimap<int, vector<float>> training,vecto
     }
 }
 
-float Algorithm2::produitScalaire(vector<float> vec1, vector<float> vec2){
+//compute scalar product for 2 vectors
+float Algorithm2::scalarProduct(vector<float> vec1, vector<float> vec2){
     float res = 0;
     if(vec1.size()!=vec2.size()){
         cout << "error for produitScalaire" << endl;
@@ -67,7 +59,8 @@ float Algorithm2::produitScalaire(vector<float> vec1, vector<float> vec2){
     return res;
 }
 
-float Algorithm2::norme(vector<float> vec){
+//compute the norm for a vector
+float Algorithm2::norm(vector<float> vec){
     float res = 0;
     float sum = 0;
     for(int i=0;i<vec.size();i++){

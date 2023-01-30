@@ -5,7 +5,6 @@
 #include "algorithm2.hpp"
 #include "compareAlgo.hpp"
 
-
 static void help(char *argv[],int argc, int c);
 static void readData(char *argv[],int argc, int c);
 static void guess(char *argv[],int argc, int c);
@@ -14,6 +13,7 @@ static void algorithms(char *argv[], int argc, int c);
 
 const int NUMBER_OF_AVAILABLE_ALGORITHMS = 2;
 
+//declaration of commands available for user
 static struct option opts[] = {
 	{ "help", 0, 0, 'h' },
 	{ "readData", 1, 0, 'r' },
@@ -52,6 +52,8 @@ int main(int argc, char *argv[]){
 
 }
 
+//print help about the program and about commands available for the program
+//describe arguments of each commands
 static void help(char *argv[],int argc, int c){
     if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
         if(argc==2){
@@ -112,6 +114,7 @@ static void help(char *argv[],int argc, int c){
     }
 }
 
+//print each available algorithms (name and Id)
 static void algorithms(char *argv[],int argc, int c){
     if((enoughArguments(argc,argv,c))&&(notTooMuchArguments(argc,argv,c))){
         Algorithm1 algo1;
@@ -124,9 +127,7 @@ static void algorithms(char *argv[],int argc, int c){
     }
 }
 
-//TODO: rendre tout ça plus propre de manière générale
-//TODO: ajouter commentaires
-//TODO: surement possible de le faire avec un switch et en mettant un préfixe à chaque argument genre 'FILE', "exemple.txt", "TRAINING", true... etc
+//read data from a file, able to read a percentage of the file and to read it from the start or from the end
 static void readData(char *argv[], int argc, int c){
     cout << endl;
 
@@ -168,6 +169,8 @@ static void readData(char *argv[], int argc, int c){
 
 }
 
+//guess data with a file used for training the program and a file with only one algorithm
+//the number of sample used, k, is optional and user-adjustable
 static void guess(char *argv[], int argc, int c){
     cout << endl;
 
@@ -216,7 +219,7 @@ static void guess(char *argv[], int argc, int c){
                 algo = new Algorithm2(nbSample);
                 break;
         }
-        algo->traiter(data4Training,data4Testing);
+        algo->process(data4Training,data4Testing);
         algo->print();
     }else{
         cout << "not enough arguments or too much arguments " << endl;
@@ -224,6 +227,8 @@ static void guess(char *argv[], int argc, int c){
     }
 }
 
+//compare the functionning of algorithms which are selected by Id
+//the number of sample used, k, is optional and user-adjustable
 static void compare(char *argv[], int argc, int c){
     cout << endl;
 
