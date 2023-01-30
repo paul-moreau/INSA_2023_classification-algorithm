@@ -19,7 +19,7 @@ Algorithm1::Algorithm1(int nbSample2Use){
 //Apply the specific method of the algorithm to the data
 float Algorithm1::applyMethod(vector<float> vecTesting,vector<float> vecTraining){
     vector<float> diffPerSample;
-    //cout << "_nbSample2Use = " << _nbSample2Use << endl;
+
     for(int i=0;i<_nbSample2Use;i++){
         float difference = abs(vecTesting[i]-vecTraining[i]);
         diffPerSample.push_back(difference);

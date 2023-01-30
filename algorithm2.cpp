@@ -25,9 +25,9 @@ float Algorithm2::applyMethod(vector<float> vecTesting, vector<float> vecTrainin
         newVecTesting.push_back(vecTesting[i]);
         newVecTraining.push_back(vecTraining[i]);
     }
-    float prodScal = produitScalaire(newVecTesting,newVecTraining);
-    float normeTest = norme(newVecTesting);
-    float normeRef = norme(newVecTraining);
+    float prodScal = scalarProduct(newVecTesting,newVecTraining);
+    float normeTest = norm(newVecTesting);
+    float normeRef = norm(newVecTraining);
     //cout << "prodScalaire = " << prodScal << " normeTest = " << normeTest << " normeRef"
     return prodScal/(normeRef*normeTest);
 }

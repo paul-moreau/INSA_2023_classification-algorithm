@@ -286,7 +286,7 @@ static void compare(char *argv[], int argc, int c){
 
         comparatif->whichAlgo(algo2Test);
 
-        comparatif->testerAlgo();
+        comparatif->testAlgo();
 
         comparatif->print();
     }else{
