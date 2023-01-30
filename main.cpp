@@ -101,7 +101,7 @@ static void help(char *argv[],int argc, int c){
                         "\t\tk : optional, int, default value maximal number of samples per data\n"
                         "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
             }else if((choice=="A")||(choice=="ALGORITHMS")) {
-                printf("stfu noob it is easy");
+                printf("trivial");
             }else{
                 printf("Unknown command");
             }
