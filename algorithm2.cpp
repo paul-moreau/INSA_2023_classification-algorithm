@@ -22,19 +22,32 @@ Algorithm2::~Algorithm2(){
 
 }
 
-float Algorithm2::applyMethod(vector<float> vectTesting, vector<float> vecTraining){
-    float prodScal = produitScalaire(vectTesting,vecTraining);
-    float normeTest = norme(vectTesting);
-    float normeRef = norme(vecTraining);
+float Algorithm2::applyMethod(vector<float> vecTesting, vector<float> vecTraining){
+    vector<float> newVecTesting, newVecTraining;
+    //cout << "_nbSample2Use = " << _nbSample2Use << endl;
+    for(int i=0;i<_nbSample2Use;i++){
+        newVecTesting.push_back(vecTesting[i]);
+        newVecTraining.push_back(vecTraining[i]);
+    }
+    float prodScal = produitScalaire(newVecTesting,newVecTraining);
+    float normeTest = norme(newVecTesting);
+    float normeRef = norme(newVecTraining);
+    //cout << "prodScalaire = " << prodScal << " normeTest = " << normeTest << " normeRef"
     return prodScal/(normeRef*normeTest);
 }
 
 void Algorithm2::add2PredictedResult(multimap<int, vector<float>> training,vector<float> firstResult) {
     multimap<int,vector<float>>::iterator itTraining;
     int indMax = max_element(firstResult.begin(),firstResult.end()) - firstResult.begin();
+    //cout << "indMax = " << indMax << endl;
     int j=0;
+    /*for(float f : firstResult){
+        cout << f << " ";
+    }
+    cout << endl;*/
     for(itTraining=training.begin();itTraining!=training.end();itTraining++) {
         if (j == indMax) {
+            //cout << " " << (*itTraining).first << endl;
             _predictedResult.push_back((*itTraining).first);
             itTraining = training.end();
         }

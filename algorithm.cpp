@@ -8,7 +8,7 @@ void const Algorithm::print(){
     cout << "-------------PRINT ALGO-------------" << endl;
     cout << "Name = " << _name << endl;
     cout << "Number of sample to use = " << _nbSample2Use << endl;
-    cout << "Affichage de result : " << endl;
+    cout << "Predicted results : " << endl;
     for(int i : _predictedResult){
         cout << i << " ";
     }
@@ -24,6 +24,7 @@ void Algorithm::traiter(Data data4Training, Data data4Testing){
     multimap<int,vector<float>>::iterator itTesting;
     multimap<int, vector<float>> testing;
     testing = data4Testing.getData();
+    cout << "nbOfSample2Use = " << _nbSample2Use << endl;
     for(itTesting = testing.begin(); itTesting != testing.end(); itTesting++){
         vector<float> firstResult;
         for(itTraining = training.begin(); itTraining != training.end(); itTraining++){

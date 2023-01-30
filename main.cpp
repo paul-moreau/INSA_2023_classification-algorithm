@@ -21,25 +21,6 @@ static struct option opts[] = {
 	{ "compare", 1, 0, 'c' },
     { "algorithms", 0, 0, 'a' }
 };
-/*int main(){
-    Data dataTrain;
-    dataTrain.readExistingFile("../data/train.txt");
-    dataTrain.print();
-
-    Data dataTest;
-    dataTest.readExistingFile("../data/test.txt");
-    dataTest.print();
-
-    Algorithm1* algo = new Algorithm1();
-    algo->print();
-    algo->traiter(dataTrain,dataTest);
-    //algo->print();
-    CompareAlgo* comparatif = new CompareAlgo(dataTest,dataTrain);
-    vector<Algorithm*> algos2Test;
-    algos2Test.push_back(algo);
-    comparatif->whichAlgo(algos2Test);
-    comparatif->testerAlgo();
-}*/
 
 int main(int argc, char *argv[]){
     int c, option_index = 0;
@@ -263,7 +244,7 @@ static void compare(char *argv[], int argc, int c){
         int nbAlgo2Test = stoi(argv[4]);
         
         if(argc > 5+nbAlgo2Test){
-            string strNbSample = argv[4+nbAlgo2Test];
+            string strNbSample = argv[5+nbAlgo2Test];
             if(stoi(strNbSample)>nbSample){
                 cout << "Le nombre de sample choisi n'est pas pris en compte car il est trop grand : " << endl;
                 cout << "il doit etre < " << nbSample << endl;

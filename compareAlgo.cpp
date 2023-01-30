@@ -26,7 +26,10 @@ void CompareAlgo::print(){
 void CompareAlgo::whichAlgo(vector<Algorithm*> algos2Test){
     cout << "-------------ADD ALGOS-------------" << endl;
     _algos = algos2Test;
-    cout << algos2Test.size() << " algorithme(s) a tester ajoute(s)" << endl;
+    cout << _algos.size() << " algorithme(s) a tester ajoute(s)" << endl;
+    for(int i=0;i<_algos.size();i++){
+        _algos[i]->print();
+    }
     cout << "-----------------------------------" << endl;
     cout << endl;
 }

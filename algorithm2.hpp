@@ -21,7 +21,7 @@ class Algorithm2 : public Algorithm{
         float produitScalaire(vector<float> vec1, vector<float> vec2);
         float norme(vector<float> vec);
 
-        float applyMethod(vector<float> vectTesting, vector<float> vecTraining);
+        float applyMethod(vector<float> vecTesting, vector<float> vecTraining);
         void add2PredictedResult(multimap<int, vector<float>> training, vector<float> firstResult);
 
 };
