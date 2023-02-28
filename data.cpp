@@ -39,8 +39,9 @@ int Data::useFile(string pathFileReaded, string pathFileWrote, string position, 
     if(nombreData != _nbData){
         cout << "ERREUR: Données du fichier mal lues." << endl;
     }
-
-    applyRate2Data(rate,position);
+    if(rate!=100){
+        applyRate2Data(rate,position);
+    }
     writeFile(pathFileWrote);
 
     return 1;
