@@ -13,6 +13,9 @@ void Data::print() const{
     cout << this->_nbData << endl;
     cout << "Nombre de samples maximal par data : ";
     cout << this->_nbSampleMax << endl;
+    for(auto it = _howMuchPerData.begin();it!=_howMuchPerData.end();++it){
+        cout << "for " << (*it).first << ", there are " << (*it).second << " data" << endl;
+    }
     cout << "-----------------------------------" << endl;
     cout << endl;
 }
@@ -38,6 +41,9 @@ int Data::useFile(string pathFileReaded, string pathFileWrote, string position, 
     }
     if(nombreData != _nbData){
         cout << "ERREUR: Données du fichier mal lues." << endl;
+    }
+    for(int i=0;i<10;i++){
+        _howMuchPerData.insert(pair(i,howMuch(i)));
     }
     if(rate!=100){
         applyRate2Data(rate,position);

@@ -90,7 +90,7 @@ static void help(char *argv[],int argc, int c){
                         "\t\t\tNumber of samples per data to use, should be inferior or equal to the maximal number of samples per data \n");
             }else if((choice=="C")||(choice=="COMPARE")){
                 printf( "-c --compare : Compare functionning of <algorithm1> with <algorithm2> with <files> for <k> elements\n"
-                        "Example : -c pathFileForTraining  numberOfAlgorithmToCompare AlgorithmId1 ... AlgorithmIdX k\n"
+                        "Example : -c pathFileForTraining  pathFileForTesting numberOfAlgorithmToCompare AlgorithmId1 ... AlgorithmIdX k\n"
                         "\t\tpathFileForTraining : mandatory, string\n"
                         "\t\t\tPath of the file with data to train the classifier\n"
                         "\t\tpathFileForTesting : mandatory, string\n"
@@ -159,9 +159,6 @@ static void readData(char *argv[], int argc, int c){
         Data test;
         test.useFile(pathFile2Read,pathFile2Write,position,percentage);
         test.print();
-        for(int i=0;i<10;i++){
-            cout << "for " << i << ", there are " << test.howMuch(i) << " data" << endl;
-        }
     }else{
         cout << "not enough arguments or too much arguments " << endl;
         printAllArguments(argc,argv);

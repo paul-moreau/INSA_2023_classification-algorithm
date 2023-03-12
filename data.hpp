@@ -12,7 +12,8 @@ class Data{
         int _nbSampleMax;                       //Nombre de caractéristiques par données (=nombre de valeurs dans chaque vecteur)
         bool _training;                         //true => données pour l'apprentissage, false => données à tester, à revoir peut-être
         multimap<int,vector<float>> _data;      //multimap contenant les données (int, clé) ainsi que leurs caractéristiques (vector<float>, valeurs)
-        
+        map<int,int> _howMuchPerData;
+
     public:
         Data();
 
